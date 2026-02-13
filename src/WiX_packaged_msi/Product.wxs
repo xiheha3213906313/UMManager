@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs"
+	 xmlns:ui="http://wixtoolset.org/schemas/v4/wxs/ui">
+	<Package Name="UMManager" Language="2052" Version="2.22.9" Manufacturer="UMManager" UpgradeCode="74c41f9e-6148-4ad6-8f17-e4e43f361706" Scope="perMachine">
+		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+		<MediaTemplate EmbedCab="yes" />
+
+		<Icon Id="AppIcon" SourceFile="..\UMManager.WinUI\Assets\WindowIcon.ico" />
+		<Property Id="ARPPRODUCTICON" Value="AppIcon" />
+
+		<ui:WixUI Id="WixUI_InstallDir" InstallDirectory="INSTALLFOLDER" />
+		<UIRef Id="WixUI_ErrorProgressText" />
+
+		<StandardDirectory Id="ProgramFiles64Folder">
+			<Directory Id="INSTALLFOLDER" Name="UMManager" />
+		</StandardDirectory>
+
+		<StandardDirectory Id="ProgramMenuFolder">
+			<Directory Id="ApplicationProgramsFolder" Name="UMManager" />
+		</StandardDirectory>
+
+		<Feature Id="ProductFeature" Title="UMManager" Level="1">
+			<ComponentGroupRef Id="AppFiles" />
+			<ComponentRef Id="ApplicationShortcut" />
+			<ComponentRef Id="DesktopShortcut" />
+		</Feature>
+	</Package>
+
+	<Fragment>
+		<DirectoryRef Id="ApplicationProgramsFolder">
+			<Component Id="ApplicationShortcut" Guid="*">
+				<Shortcut Id="ApplicationStartMenuShortcut"
+						  Name="UMManager"
+						  Description="UMManager"
+						  Icon="AppIcon"
+						  Target="[INSTALLFOLDER]UMManager.exe"
+						  WorkingDirectory="INSTALLFOLDER" />
+				<RemoveFolder Id="RemoveApplicationProgramsFolder" On="uninstall" />
+				<RegistryValue Root="HKCU" Key="Software\UMManager" Name="installed" Type="integer" Value="1" KeyPath="yes" />
+			</Component>
+		</DirectoryRef>
+		<StandardDirectory Id="DesktopFolder">
+			<Component Id="DesktopShortcut" Guid="*">
+				<Shortcut Id="ApplicationDesktopShortcut"
+						  Name="UMManager"
+						  Description="UMManager"
+						  Icon="AppIcon"
+						  Target="[INSTALLFOLDER]UMManager.exe"
+						  WorkingDirectory="INSTALLFOLDER" />
+				<RegistryValue Root="HKCU" Key="Software\UMManager" Name="desktopShortcut" Type="integer" Value="1" KeyPath="yes" />
+			</Component>
+		</StandardDirectory>
+	</Fragment>
+</Wix>

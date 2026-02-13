@@ -1,0 +1,30 @@
+<Project Sdk="WixToolset.Sdk/6.0.2" ToolsVersion="4.0">
+  <PropertyGroup>
+    <OutputName>UMManager</OutputName>
+    <OutputType>Package</OutputType>
+    <Cultures>zh-CN</Cultures>
+    <Platform>x64</Platform>
+    <InstallerPlatform>x64</InstallerPlatform>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RepoRoot>$(MSBuildProjectDirectory)\..</RepoRoot>
+    <PublishDir>$(RepoRoot)\UMManager.WinUI\bin\x64\$(Configuration)\net9.0-windows10.0.22621.0\win-x64\publish</PublishDir>
+    <DefineConstants>PublishDir=$(PublishDir)</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="WixToolset.Heat" Version="6.0.2" />
+    <PackageReference Include="WixToolset.UI.wixext" Version="6.0.2" />
+  </ItemGroup>
+  <ItemGroup>
+    <HarvestDirectory Include="$(PublishDir)">
+      <ComponentGroupName>AppFiles</ComponentGroupName>
+      <DirectoryRefId>INSTALLFOLDER</DirectoryRefId>
+      <PreprocessorVariable>var.PublishDir</PreprocessorVariable>
+      <SuppressRootDirectory>true</SuppressRootDirectory>
+    </HarvestDirectory>
+    <BindPath Include="$(PublishDir)" />
+  </ItemGroup>
+  <Target Name="PublishWinUI" BeforeTargets="Build">
+    <Exec Command="dotnet publish &quot;$(RepoRoot)\UMManager.WinUI\UMManager.WinUI.csproj&quot; -c $(Configuration) -r win-x64 -p:Platform=x64 -v:q -clp:ErrorsOnly -nologo" />
+  </Target>
+</Project>

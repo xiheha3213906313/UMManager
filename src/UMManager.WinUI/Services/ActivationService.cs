@@ -1,0 +1,579 @@
+using System.Globalization;
+using System.Security.Principal;
+using Windows.Graphics;
+using Windows.Win32;
+using Windows.Win32.Foundation;
+using Windows.Win32.UI.WindowsAndMessaging;
+using CommunityToolkitWrapper;
+using UMManager.Core.Contracts.Services;
+using UMManager.Core.GamesService;
+using UMManager.Core.Helpers;
+using UMManager.Core.Services.ModPresetService;
+using UMManager.WinUI.Activation;
+using UMManager.WinUI.Contracts.Services;
+using UMManager.WinUI.Models.Options;
+using UMManager.WinUI.Models.Settings;
+using UMManager.WinUI.Services.AppManagement;
+using UMManager.WinUI.Services.AppManagement.Updating;
+using UMManager.WinUI.Services.ModHandling;
+using UMManager.WinUI.Services.Notifications;
+using UMManager.WinUI.Views;
+using Microsoft.UI.Text;
+using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
+using Serilog;
+
+namespace UMManager.WinUI.Services;
+
+public class ActivationService : IActivationService
+{
+    private readonly NotificationManager _notificationManager;
+    private readonly ISkinManagerService _skinManagerService;
+    private readonly INavigationViewService _navigationViewService;
+    private readonly ActivationHandler<LaunchActivatedEventArgs> _defaultHandler;
+    private readonly IEnumerable<IActivationHandler> _activationHandlers;
+    private readonly IThemeSelectorService _themeSelectorService;
+    private readonly ILogger _logger;
+    private readonly ILocalSettingsService _localSettingsService;
+    private readonly IGameService _gameService;
+    private readonly ILanguageLocalizer _languageLocalizer;
+    private readonly ElevatorService _elevatorService;
+    private readonly UpdateChecker _updateChecker;
+    private readonly IWindowManagerService _windowManagerService;
+    private readonly AutoUpdaterService _autoUpdaterService;
+    private readonly SelectedGameService _selectedGameService;
+    private readonly ModUpdateAvailableChecker _modUpdateAvailableChecker;
+    private readonly ModNotificationManager _modNotificationManager;
+    private readonly LifeCycleService _lifeCycleService;
+    private readonly ModPresetService _modPresetService;
+    private UIElement? _shell = null;
+
+    private readonly string[] _args = Environment.GetCommandLineArgs().Skip(1).ToArray();
+
+    public ActivationService(ActivationHandler<LaunchActivatedEventArgs> defaultHandler,
+        IEnumerable<IActivationHandler> activationHandlers, IThemeSelectorService themeSelectorService,
+        ILocalSettingsService localSettingsService,
+        ElevatorService elevatorService, UpdateChecker updateChecker,
+        IWindowManagerService windowManagerService, AutoUpdaterService autoUpdaterService, IGameService gameService,
+        ILanguageLocalizer languageLocalizer, SelectedGameService selectedGameService,
+        ModUpdateAvailableChecker modUpdateAvailableChecker, ILogger logger,
+        ModNotificationManager modNotificationManager, INavigationViewService navigationViewService,
+        ISkinManagerService skinManagerService, NotificationManager notificationManager,
+        LifeCycleService lifeCycleService, ModPresetService modPresetService)
+    {
+        _defaultHandler = defaultHandler;
+        _activationHandlers = activationHandlers;
+        _themeSelectorService = themeSelectorService;
+        _localSettingsService = localSettingsService;
+        _elevatorService = elevatorService;
+        _updateChecker = updateChecker;
+        _windowManagerService = windowManagerService;
+        _autoUpdaterService = autoUpdaterService;
+        _gameService = gameService;
+        _languageLocalizer = languageLocalizer;
+        _selectedGameService = selectedGameService;
+        _modUpdateAvailableChecker = modUpdateAvailableChecker;
+        _modNotificationManager = modNotificationManager;
+        _navigationViewService = navigationViewService;
+        _skinManagerService = skinManagerService;
+        _notificationManager = notificationManager;
+        _lifeCycleService = lifeCycleService;
+        _modPresetService = modPresetService;
+        _logger = logger.ForContext<ActivationService>();
+    }
+
+    public async Task ActivateAsync(object activationArgs)
+    {
+#if DEBUG
+        _logger.Information("UMManager starting up in DEBUG mode...");
+#elif RELEASE
+        _logger.Information("UMManager starting up in RELEASE mode...");
+#endif
+
+        await HandleLaunchArgsAsync();
+
+        // Check if there is another instance of UMManager running
+        await CheckIfAlreadyRunningAsync();
+
+        // Execute tasks before activation.
+        await InitializeAsync();
+
+        // Set the MainWindow Content.
+        if (App.MainWindow.Content == null)
+        {
+            _shell = App.GetService<ShellPage>();
+            App.MainWindow.Content = _shell ?? new Frame();
+        }
+
+        // Handle activation via ActivationHandlers.
+        await HandleActivationAsync(activationArgs);
+
+        // Activate the MainWindow.
+        App.MainWindow.Activate();
+
+        // Set MainWindow Cleanup on Close.
+        App.MainWindow.Closed += OnApplicationExit;
+
+        // Execute tasks after activation.
+        await StartupAsync();
+
+        // Show popups
+        ShowStartupPopups();
+    }
+
+    private async Task CheckIfAlreadyRunningAsync()
+    {
+        var isJasmRunningHWND = await IsJasmRunning();
+
+        if (!isJasmRunningHWND.HasValue) return;
+
+        var hWnd = isJasmRunningHWND.Value;
+
+        _logger.Information("UMManager is already running, exiting...");
+        try
+        {
+            PInvoke.ShowWindow(hWnd, SHOW_WINDOW_CMD.SW_RESTORE);
+            PInvoke.SetWindowPos(hWnd, new HWND(IntPtr.Zero), 0, 0, 0, 0,
+                SET_WINDOW_POS_FLAGS.SWP_NOSIZE | SET_WINDOW_POS_FLAGS.SWP_NOZORDER);
+            PInvoke.SetForegroundWindow(hWnd);
+        }
+        catch (Exception e)
+        {
+            _logger.Error(e, "Could not bring UMManager to foreground");
+            return;
+        }
+
+        Application.Current.Exit();
+        await Task.Delay(-1);
+    }
+
+
+    private async Task<HWND?> IsJasmRunning()
+    {
+        nint? processHandle;
+        try
+        {
+            processHandle = await _lifeCycleService.CheckIfAlreadyRunningAsync();
+        }
+        catch (Exception e)
+        {
+            _logger.Error(e, "Could not determine if UMManager is already running. Assuming not");
+            return null;
+        }
+
+        if (processHandle == null) return null;
+
+        return new HWND(processHandle.Value);
+    }
+
+    private async Task HandleActivationAsync(object activationArgs)
+    {
+        var activationHandler = _activationHandlers.FirstOrDefault(h => h.CanHandle(activationArgs));
+
+
+        if (activationHandler is not null)
+        {
+            _logger.Debug("Handling activation: {ActivationName}",
+                activationHandler?.ActivationName);
+
+            await activationHandler?.HandleAsync(activationArgs)!;
+        }
+
+        if (_defaultHandler.CanHandle(activationArgs))
+        {
+            _logger.Debug("Handling activation: {ActivationName}", _defaultHandler.ActivationName);
+            await _defaultHandler.HandleAsync(activationArgs);
+        }
+    }
+
+    private async Task InitializeAsync()
+    {
+        await _selectedGameService.InitializeAsync();
+        await SetLanguage();
+        await SetWindowSettings();
+        await _modPresetService.InitializeAsync(_localSettingsService.ApplicationDataFolder).ConfigureAwait(false);
+        await _themeSelectorService.InitializeAsync().ConfigureAwait(false);
+        _notificationManager.Initialize();
+    }
+
+
+    private async Task StartupAsync()
+    {
+        await _themeSelectorService.SetRequestedThemeAsync();
+        await _updateChecker.InitializeAsync();
+        await _modUpdateAvailableChecker.InitializeAsync().ConfigureAwait(false);
+        await Task.Run(() => _autoUpdaterService.UpdateAutoUpdater()).ConfigureAwait(false);
+        await Task.Run(() => _elevatorService.Initialize()).ConfigureAwait(false);
+    }
+
+    const int MinimizedPosition = -32000;
+
+    private async Task SetWindowSettings()
+    {
+        var screenSize = await _localSettingsService.ReadSettingAsync<ScreenSizeSettings>(ScreenSizeSettings.Key);
+        if (screenSize == null)
+            return;
+
+        if (screenSize.PersistWindowSize && screenSize.Width != 0 && screenSize.Height != 0)
+        {
+            _logger.Debug($"Window size loaded: {screenSize.Width}x{screenSize.Height}");
+            App.MainWindow.SetWindowSize(screenSize.Width, screenSize.Height);
+        }
+
+        if (screenSize.PersistWindowPosition)
+        {
+            if (screenSize.XPosition != 0 && screenSize.YPosition != 0 &&
+                screenSize.XPosition != MinimizedPosition && screenSize.YPosition != MinimizedPosition)
+                App.MainWindow.AppWindow.Move(new PointInt32(screenSize.XPosition, screenSize.YPosition));
+            else
+                App.MainWindow.CenterOnScreen();
+
+            if (screenSize.IsFullScreen)
+                App.MainWindow.Maximize();
+        }
+    }
+
+    private async void OnApplicationExit(object sender, WindowEventArgs args)
+    {
+        if (App.ShutdownComplete) return;
+
+        args.Handled = true;
+
+        if (App.IsShuttingDown)
+        {
+#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+            Task.Run(async () =>
+#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+            {
+                var softShutdownGracePeriod = TimeSpan.FromSeconds(2);
+                await Task.Delay(softShutdownGracePeriod);
+
+                _logger.Warning(
+                    "UMManager shutdown took too long (>{maxShutdownGracePeriod}s), ignoring cleanup and exiting...",
+                    softShutdownGracePeriod);
+                App.ShutdownComplete = true;
+                App.MainWindow.DispatcherQueue.TryEnqueue(() =>
+                {
+                    Application.Current.Exit();
+                    App.MainWindow.Close();
+                });
+            });
+
+#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+            Task.Run(async () =>
+#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+            {
+                var maxShutdownGracePeriod = TimeSpan.FromSeconds(5);
+                await Task.Delay(maxShutdownGracePeriod);
+
+                _logger.Fatal("UMManager failed to close after {maxShutdownGracePeriod} seconds, forcing exit...",
+                    maxShutdownGracePeriod);
+                Environment.Exit(1);
+            });
+            return;
+        }
+
+
+        await _lifeCycleService.StartShutdownAsync().ConfigureAwait(false);
+    }
+
+    // Declared here for now, might move to a different class later.
+    private const string IgnoreAdminWarningKey = "IgnoreAdminPrivelegesWarning";
+
+    private async Task HandleLaunchArgsAsync()
+    {
+        if (_args.Length == 0)
+            return;
+
+        var supportedGames = Enum.GetNames<SupportedGames>().Select(v => v.ToLower()).ToArray();
+
+        if (_args.Any(arg => arg.Contains("help", StringComparison.OrdinalIgnoreCase)) &&
+            // WinUI doesnt seem to launch like a regular console app.
+            // This kinda works, but it's not perfect.
+            // Overriding the main entry point didn't seem to work either.
+            PInvoke.AttachConsole(unchecked((uint)-1)))
+        {
+            // TODO: Use CommandLineParser or something similar.
+            Console.WriteLine("UMManager Command line arguments:");
+
+            Console.WriteLine(
+                $"      --game <game> - Launch UMManager with the specified game selected. Supported games: {string.Join('|', supportedGames)}");
+
+            Console.WriteLine(
+                "           --switch - If used with --game, will switch to the selected game if UMManager is already running. This is done by exiting the already running instance.");
+
+            Application.Current.Exit();
+            await Task.Delay(-1);
+        }
+
+
+        await _selectedGameService.InitializeAsync().ConfigureAwait(false);
+        var notSelectedGames = await _selectedGameService.GetNotSelectedGameAsync().ConfigureAwait(false);
+
+        var launchGameArgIndex =
+            Array.FindIndex(_args, arg => arg.Equals("--game", StringComparison.OrdinalIgnoreCase));
+        if (launchGameArgIndex == -1)
+            return;
+
+        var launchGameArgValue = _args.ElementAtOrDefault(launchGameArgIndex + 1);
+        if (launchGameArgValue.IsNullOrEmpty())
+        {
+            _logger.Warning("No game specified for arg: --game <{ValidGames}>",
+                string.Join('|', Enum.GetNames<SupportedGames>().Select(v => v.ToLower())));
+            return;
+        }
+
+        var selectedGame = Enum.TryParse<SupportedGames>(launchGameArgValue, true, out var game)
+            ? game
+            : SupportedGames.Genshin;
+
+        if (!notSelectedGames.Contains(selectedGame))
+            return;
+
+        var otherProcess = _lifeCycleService.GetOtherInstanceProcess();
+
+        if (otherProcess is not null)
+        {
+            if (!_args.Contains("--switch"))
+            {
+                // If the other instance is running, and the switch flag is not present, return.
+                // Will be handled by the OtherInstance check later.
+                return;
+            }
+
+            try
+            {
+                using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(5));
+
+                _logger.Information("Closing running instance of UMManager to switch to {SelectedGame}", selectedGame);
+                otherProcess.CloseMainWindow();
+                await otherProcess.WaitForExitAsync(cts.Token).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                _logger.Error(e, "Failed to close running instance of UMManager");
+                return;
+            }
+
+            try
+            {
+                await _selectedGameService.SaveSelectedGameAsync(selectedGame.ToString()).ConfigureAwait(false);
+                await _selectedGameService.InitializeAsync().ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                // If this errors then I don't know what to do.
+                _logger.Error(e, "Failed to save selected game");
+            }
+
+            return;
+        }
+
+        try
+        {
+            await _selectedGameService.SaveSelectedGameAsync(selectedGame.ToString()).ConfigureAwait(false);
+            await _selectedGameService.InitializeAsync().ConfigureAwait(false);
+        }
+        catch (Exception e)
+        {
+            // If this errors then I don't know what to do.
+            _logger.Error(e, "Failed to save selected game");
+            return;
+        }
+
+
+        _logger.Information("Game selected via launch args: {SelectedGame}", selectedGame);
+    }
+
+    private void ShowStartupPopups()
+    {
+        App.MainWindow.DispatcherQueue.EnqueueAsync(async () =>
+        {
+            await Task.Delay(2000);
+            await AdminWarningPopup();
+            await Task.Delay(1000);
+            await NewFolderStructurePopup();
+        });
+    }
+
+    private async Task AdminWarningPopup()
+    {
+        var identity = WindowsIdentity.GetCurrent();
+        var principal = new WindowsPrincipal(identity);
+
+        if (!principal.IsInRole(WindowsBuiltInRole.Administrator)) return;
+
+        var ignoreWarning = await _localSettingsService.ReadSettingAsync<bool>(IgnoreAdminWarningKey);
+
+        if (ignoreWarning) return;
+
+        var stackPanel = new StackPanel();
+        var textWarning = new TextBlock()
+        {
+            Text = _languageLocalizer.GetLocalizedStringOrDefault("Dialog.AdminWarning.Text",
+                defaultValue:
+                "你正在以管理员身份运行 UMManager，不建议这样做。\n" +
+                "UMManager 并非为管理员权限设计。\n" +
+                "即使是一些小概率的 bug，也可能对文件系统造成严重影响。\n\n" +
+                "建议退出并以非管理员身份重新启动。\n\n" +
+                "风险自负，请谨慎使用。"),
+            TextWrapping = TextWrapping.WrapWholeWords
+        };
+        stackPanel.Children.Add(textWarning);
+
+        var doNotShowAgain = new CheckBox()
+        {
+            IsChecked = false,
+            Content = _languageLocalizer.GetLocalizedStringOrDefault("Common.CheckBox.DoNotShowAgain", defaultValue: "不再提示"),
+            Margin = new Thickness(0, 10, 0, 0)
+        };
+
+        stackPanel.Children.Add(doNotShowAgain);
+
+
+        var dialog = new ContentDialog
+        {
+            Title = _languageLocalizer.GetLocalizedStringOrDefault("Dialog.AdminWarning.Title", defaultValue: "管理员身份运行警告"),
+            Content = stackPanel,
+            PrimaryButtonText = _languageLocalizer.GetLocalizedStringOrDefault("Common.Button.Understand", defaultValue: "我已了解"),
+            SecondaryButtonText = _languageLocalizer.GetLocalizedStringOrDefault("Common.Button.Exit", defaultValue: "退出"),
+            DefaultButton = ContentDialogButton.Primary
+        };
+
+        var result = await _windowManagerService.ShowDialogAsync(dialog);
+
+        if (result == ContentDialogResult.Secondary) Application.Current.Exit();
+
+        if (doNotShowAgain.IsChecked == true)
+            await _localSettingsService.SaveSettingAsync(IgnoreAdminWarningKey, true);
+    }
+
+    public const string IgnoreNewFolderStructureKey = "IgnoreNewFolderStructureWarning";
+
+    private async Task NewFolderStructurePopup()
+    {
+        if (!_skinManagerService.IsInitialized)
+        {
+            await _localSettingsService.SaveSettingAsync(IgnoreNewFolderStructureKey, true);
+        }
+
+        var ignoreWarning = await _localSettingsService.ReadOrCreateSettingAsync<bool>(IgnoreNewFolderStructureKey);
+
+        if (ignoreWarning) return;
+
+        var stackPanel = new StackPanel();
+        var textWarning = new TextBlock()
+        {
+            Text = _languageLocalizer.GetLocalizedStringOrDefault("Dialog.NewFolderStructure.Text1",
+                defaultValue:
+                "此版本的 UMManager 使用了新的文件夹结构。\n\n" +
+                "现在角色会按分类组织，每个分类有自己的文件夹。新的结构如下：\n" +
+                "Mods/Category/Character/<Mod Folders>\n" +
+                "因此在你整理之前，UMManager 将看不到任何模组。\n" +
+                "这只需要做一次，你也可以手动整理。\n\n" +
+                "此外，角色文件夹改为按需创建，并且可以在设置页清理空文件夹。"),
+            IsTextSelectionEnabled = true,
+            TextWrapping = TextWrapping.WrapWholeWords
+        };
+        stackPanel.Children.Add(textWarning);
+
+        var textWarning2 = new TextBlock()
+        {
+            Text = _languageLocalizer.GetLocalizedStringOrDefault("Dialog.NewFolderStructure.Text2",
+                defaultValue: "如果你不确定，建议先备份模组。我已在自己的模组上测试过。"),
+            FontWeight = FontWeights.Bold,
+            IsTextSelectionEnabled = true,
+            TextWrapping = TextWrapping.WrapWholeWords
+        };
+
+        stackPanel.Children.Add(textWarning2);
+
+
+        var textWarning3 = new TextBlock()
+        {
+            Text = _languageLocalizer.GetLocalizedStringOrDefault("Dialog.NewFolderStructure.Text3",
+                defaultValue:
+                "在你选择下面任意选项之前，此弹窗会持续显示。你也可以在设置页使用“整理”按钮。\n" +
+                "想查看具体执行情况请查看日志。"),
+            IsTextSelectionEnabled = true,
+            TextWrapping = TextWrapping.WrapWholeWords
+        };
+
+        stackPanel.Children.Add(textWarning3);
+
+
+        var dialog = new ContentDialog
+        {
+            Title = _languageLocalizer.GetLocalizedStringOrDefault("Dialog.NewFolderStructure.Title", defaultValue: "新的文件夹结构"),
+            Content = stackPanel,
+            PrimaryButtonText = _languageLocalizer.GetLocalizedStringOrDefault("Dialog.NewFolderStructure.Primary", defaultValue: "帮我整理模组"),
+            SecondaryButtonText = _languageLocalizer.GetLocalizedStringOrDefault("Dialog.NewFolderStructure.Secondary", defaultValue: "我自己处理"),
+            CloseButtonText = _languageLocalizer.GetLocalizedStringOrDefault("Common.Button.Cancel", defaultValue: "取消"),
+            DefaultButton = ContentDialogButton.Primary
+        };
+
+        var result = await _windowManagerService.ShowDialogAsync(dialog);
+
+        if (result == ContentDialogResult.Primary)
+        {
+            _navigationViewService.IsEnabled = false;
+
+            try
+            {
+                var movedModsCount = await Task.Run(() =>
+                    _skinManagerService.ReorganizeModsAsync()); // Mods folder
+
+                await _skinManagerService.RefreshModsAsync();
+
+                if (movedModsCount == -1)
+                    _notificationManager.ShowNotification(
+                        _languageLocalizer.GetLocalizedStringOrDefault("Notification.ModsReorganizationFailed.Title",
+                            defaultValue: "整理 Mods 失败。"),
+                        _languageLocalizer.GetLocalizedStringOrDefault("Notification.SeeLogs.Message", defaultValue: "详情请查看日志。"),
+                        TimeSpan.FromSeconds(5));
+
+                else
+                    _notificationManager.ShowNotification(
+                        _languageLocalizer.GetLocalizedStringOrDefault("Notification.ModsReorganized.Title", defaultValue: "已整理 Mods。"),
+                        string.Format(CultureInfo.CurrentUICulture,
+                            _languageLocalizer.GetLocalizedStringOrDefault("Notification.MovedModsToCharacterFolders.Message",
+                                defaultValue: "已移动 {0} 个模组到角色文件夹")!,
+                            movedModsCount),
+                        TimeSpan.FromSeconds(5));
+            }
+            finally
+            {
+                _navigationViewService.IsEnabled = true;
+                await _localSettingsService.SaveSettingAsync(IgnoreNewFolderStructureKey, true);
+            }
+        }
+        else if (result == ContentDialogResult.Secondary)
+        {
+            await _localSettingsService.SaveSettingAsync(IgnoreNewFolderStructureKey, true);
+        }
+        else
+        {
+        }
+    }
+
+
+    private async Task SetLanguage()
+    {
+        var appSettings = await _localSettingsService.ReadOrCreateSettingAsync<AppSettings>(AppSettings.Key);
+        var selectedLanguage = appSettings.Language?.ToLower().Trim();
+
+        if (string.IsNullOrWhiteSpace(selectedLanguage))
+        {
+            selectedLanguage = "zh-cn";
+            appSettings.Language = selectedLanguage;
+            await _localSettingsService.SaveSettingAsync(AppSettings.Key, appSettings);
+        }
+
+        var supportedLanguages = _languageLocalizer.AvailableLanguages;
+        var language = supportedLanguages.FirstOrDefault(lang =>
+            lang.LanguageCode.Equals(selectedLanguage, StringComparison.CurrentCultureIgnoreCase));
+
+        if (language != null)
+            await _languageLocalizer.SetLanguageAsync(language);
+    }
+}

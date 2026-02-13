@@ -1,0 +1,993 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AppDisplayName" xml:space="preserve">
+    <value>UMManager - 皮肤模组管理器</value>
+  </data>
+  <data name="AppDescription" xml:space="preserve">
+    <value>UMManager - 皮肤模组管理器</value>
+  </data>
+  <data name="Startup1.Text" xml:space="preserve">
+    <value>作为首次设置的一部分，您需要选择 3Dmigoto（或同类 Mod Loader）的根目录及其关联的模组文件夹。该目录通常包含 3DMigoto Loader.exe（或同类启动器）以及一个模组文件夹。如果您尚未完成设置，请参见下面的链接。我发现大多数模组在 GameBanana 上，但 NexusMods 也有一些。</value>
+  </data>
+  <data name="Startup2.Text" xml:space="preserve">
+    <value>保存设置后，应用程序将在模组文件夹内为每个角色创建一个模组文件夹。该应用程序通过在模组文件夹前缀中添加“DISABLED_”来启用和禁用模组。UMManager 还支持导出由其管理的模组，如果您希望将其与其他应用程序一起使用。目前，只有这个页面和部分设置页面已经翻译完成。翻译是通过 ChatGPT 进行的，可能包含错误。</value>
+  </data>
+  <data name="Startup3.Text" xml:space="preserve">
+    <value>在使用与您的文件交互的应用程序之前，备份您的文件/模组总是一个好主意。</value>
+  </data>
+  <data name="Startup/Tooltip1.Text" xml:space="preserve">
+    <value>启用此选项将提示应用程序将现有的模组按其各自角色分配的文件夹进行排序。任何无法合理匹配的模组将放入“其他”文件夹。</value>
+  </data>
+  <data name="Startup/Tooltip2.Text" xml:space="preserve">
+    <value>一个包含多个角色名称的模组文件夹可能会错误地移到一个角色的目录中。</value>
+  </data>
+  <data name="Startup/Tooltip3.Text" xml:space="preserve">
+    <value>这可以在设置页面中稍后激活。</value>
+  </data>
+  <data name="Startup_Title.Text" xml:space="preserve">
+    <value>首次启动</value>
+    <comment>启动页面的页面标题</comment>
+  </data>
+  <data name="Settings_About.Text" xml:space="preserve">
+    <value>关于此应用程序</value>
+  </data>
+  <data name="Settings_AboutDescription.Text" xml:space="preserve">
+    <value>UMManager 的目标是使组织大量皮肤模组变得更容易</value>
+  </data>
+  <data name="Settings_ComboBox_Header.Text" xml:space="preserve">
+    <value>选择显示语言：</value>
+  </data>
+  <data name="Settings_Language_TexBlock.Text" xml:space="preserve">
+    <value>语言选项目前有限。这是一个正在进行中的工作。这是由ChatGPT翻译的。</value>
+  </data>
+  <data name="Settings_Personalization.Text" xml:space="preserve">
+    <value>个性化</value>
+  </data>
+  <data name="Settings_Theme.Text" xml:space="preserve">
+    <value>主题</value>
+  </data>
+  <data name="Settings_Theme_Dark.Content" xml:space="preserve">
+    <value>深色</value>
+  </data>
+  <data name="Settings_Theme_Default.Content" xml:space="preserve">
+    <value>默认</value>
+  </data>
+  <data name="Settings_Theme_Light.Content" xml:space="preserve">
+    <value>浅色</value>
+  </data>
+  <data name="Settings_Title.Text" xml:space="preserve">
+    <value>设置</value>
+    <comment>设置页面的页面标题</comment>
+  </data>
+  <data name="Settings_ExportDialog.Text" xml:space="preserve">
+    <value>这将导出 UMManager 管理的所有模组到您选择的导出文件夹。模组将被复制到导出文件夹，而不会从原始文件夹中删除。</value>
+  </data>
+  <data name="Settings_ExportDialogButtons.CloseButtonText" xml:space="preserve">
+    <value>取消</value>
+  </data>
+  <data name="Settings_ExportDialogButtons.PrimaryButtonText" xml:space="preserve">
+    <value>导出</value>
+  </data>
+  <data name="Settings_ExportDialog_ChangeStatus.Text" xml:space="preserve">
+    <value>更改导出的模组状态</value>
+  </data>
+  <data name="Settings_ExportDialog_KeepStructure.Text" xml:space="preserve">
+    <value>在导出文件夹中保留CharacterName/Mods的文件夹结构</value>
+  </data>
+  <data name="Settings_ExportDialog_RemoveJasm.Text" xml:space="preserve">
+    <value>从导出的模组中移除 UMManager 配置文件</value>
+  </data>
+  <data name="Settings_Export_Button.Text" xml:space="preserve">
+    <value>导出模组</value>
+  </data>
+  <data name="Settings_Export_Title.Text" xml:space="preserve">
+    <value>导出/备份模组</value>
+  </data>
+  <data name="Settings_Language.Text" xml:space="preserve">
+    <value>语言</value>
+  </data>
+  <data name="Stopped" xml:space="preserve">
+    <value>停止</value>
+  </data>
+  <data name="Waiting" xml:space="preserve">
+    <value>等待</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>错误</value>
+  </data>
+  <data name="Running" xml:space="preserve">
+    <value>运行中</value>
+  </data>
+  <data name="Common.Button.Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="Common.Button.Close" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="Common.Button.Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="Common.Button.Disable" xml:space="preserve">
+    <value>Disable</value>
+  </data>
+  <data name="Common.Button.Enable" xml:space="preserve">
+    <value>Enable</value>
+  </data>
+  <data name="Common.Button.Exit" xml:space="preserve">
+    <value>Exit</value>
+  </data>
+  <data name="Common.Button.Export" xml:space="preserve">
+    <value>Export</value>
+  </data>
+  <data name="Common.Button.No" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="Common.Button.Restart" xml:space="preserve">
+    <value>Restart</value>
+  </data>
+  <data name="Common.Button.Start" xml:space="preserve">
+    <value>Start</value>
+  </data>
+  <data name="Common.Button.Understand" xml:space="preserve">
+    <value>I understand</value>
+  </data>
+  <data name="Common.Button.Yes" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="Common.CheckBox.DoNotAskAgain" xml:space="preserve">
+    <value>Do not ask again</value>
+  </data>
+  <data name="Common.CheckBox.DoNotShowAgain" xml:space="preserve">
+    <value>Do not show again</value>
+  </data>
+  <data name="Dialog.DeleteMods.Title" xml:space="preserve">
+    <value>Delete These {0} Mods?</value>
+  </data>
+  <data name="Dialog.DeleteMods.MoveToRecycleBin" xml:space="preserve">
+    <value>Move to Recycle Bin?</value>
+  </data>
+  <data name="Dialog.DeleteMods.RemoveFromPresets" xml:space="preserve">
+    <value>Remove from Presets?</value>
+  </data>
+  <data name="Notification.ModsDeleted.Title" xml:space="preserve">
+    <value>{0} Mods Deleted</value>
+  </data>
+  <data name="Notification.ModsDeleted.Message" xml:space="preserve">
+    <value>Successfully deleted {0} in {1} Mods Folder</value>
+  </data>
+  <data name="Notification.DeleteModsError.Title" xml:space="preserve">
+    <value>Error Deleting Mods</value>
+  </data>
+  <data name="Notification.DeleteModsError.Header" xml:space="preserve">
+    <value>Error deleting mods:</value>
+  </data>
+  <data name="Notification.DeleteModsError.PresetHeader" xml:space="preserve">
+    <value>Preset error Mods:</value>
+  </data>
+  <data name="Notification.DeleteModsError.DeleteHeader" xml:space="preserve">
+    <value>Delete error Mods:</value>
+  </data>
+  <data name="Dialog.ClearEmptyFolders.Title" xml:space="preserve">
+    <value>Clear Empty Folders</value>
+  </data>
+  <data name="Dialog.ClearEmptyFolders.Text" xml:space="preserve">
+    <value>This will delete all empty folders in a character's modList if the folder is empty or only contains .UMManager_ files/folders
+If a character folder is empty then it will be deleted as well.
+Empty folders in the root of the Mods folder will also be deleted</value>
+  </data>
+  <data name="Notification.EmptyFoldersDeleted.Title" xml:space="preserve">
+    <value>Empty folders deleted</value>
+  </data>
+  <data name="Notification.EmptyFoldersDeleted.Header" xml:space="preserve">
+    <value>Deleted folders:</value>
+  </data>
+  <data name="Notification.NoCategoriesSelected.Title" xml:space="preserve">
+    <value>No categories selected</value>
+  </data>
+  <data name="Notification.NoCategoriesSelected.DisableMessage" xml:space="preserve">
+    <value>No categories were selected to disable mods.</value>
+  </data>
+  <data name="Notification.NoCategoriesSelected.RandomizeMessage" xml:space="preserve">
+    <value>No categories were selected to randomize.</value>
+  </data>
+  <data name="Dialog.DisableMods.Title" xml:space="preserve">
+    <value>Disable Mods</value>
+  </data>
+  <data name="Dialog.DisableMods.Primary" xml:space="preserve">
+    <value>Disable Mods in Categories</value>
+  </data>
+  <data name="Dialog.DisableMods.SelectCategories" xml:space="preserve">
+    <value>Select the categories you want to disable mods for:</value>
+  </data>
+  <data name="Dialog.DisableMods.SuggestPreset" xml:space="preserve">
+    <value>I suggest creating a preset as a backup if you have a lot of active mods.
+
+This will only disable mods tracked by UMManager in the categories selected.</value>
+  </data>
+  <data name="Notification.ModsDisabled.Title" xml:space="preserve">
+    <value>Mods disabled</value>
+  </data>
+  <data name="Notification.ModsDisabled.Message" xml:space="preserve">
+    <value>All tracked mods have been disabled for the categories: {0}</value>
+  </data>
+  <data name="Notification.DisableModsErrors.Title" xml:space="preserve">
+    <value>Errors while disabling mods</value>
+  </data>
+  <data name="Notification.DisableModsErrors.Header" xml:space="preserve">
+    <value>An error occured for the following mods:</value>
+  </data>
+  <data name="Dialog.RandomizeMods.Title" xml:space="preserve">
+    <value>Randomize Mods</value>
+  </data>
+  <data name="Dialog.RandomizeMods.Primary" xml:space="preserve">
+    <value>Randomize</value>
+  </data>
+  <data name="Dialog.RandomizeMods.SelectCategories" xml:space="preserve">
+    <value>Select the categories you want to randomize mods for:</value>
+  </data>
+  <data name="Dialog.RandomizeMods.Note" xml:space="preserve">
+    <value>Note: This will only randomize mods for folders that are expected to only have one mod enabled at a time. Folders starting with &quot;Others __&quot; will not be randomized. If a character has multiple in-game skins, at most one mod will be enabled for each skin.</value>
+  </data>
+  <data name="Dialog.RandomizeMods.AllowNone" xml:space="preserve">
+    <value>Allow no mods as a result. This means a mod folder may end up with no mods enabled.</value>
+  </data>
+  <data name="Dialog.RandomizeMods.SuggestPreset" xml:space="preserve">
+    <value>I suggest creating a preset as a backup if you have a lot of active mods.</value>
+  </data>
+  <data name="Notification.RandomizeFailed.Title" xml:space="preserve">
+    <value>Failed to randomize mods</value>
+  </data>
+  <data name="Notification.ModsRandomized.Title" xml:space="preserve">
+    <value>Mods randomized</value>
+  </data>
+  <data name="Notification.ModsRandomized.Message" xml:space="preserve">
+    <value>Mods have been randomized for the categories: {0}</value>
+  </data>
+  <data name="Dialog.FriendlyWarning.Title" xml:space="preserve">
+    <value>Friendly Warning</value>
+  </data>
+  <data name="Dialog.FriendlyWarning.Text" xml:space="preserve">
+    <value>Please be careful when creating commands. Commands can run any executable on your system. Only create commands from trusted sources. UMManager is not perfect and cannot protect against malicious scripts or bugs/vulnerabilities in UMManager.
+
+Pressing &quot;I understand&quot; means you understand the risks.</value>
+  </data>
+  <data name="Dialog.DeleteMod.Title" xml:space="preserve">
+    <value>Delete mod</value>
+  </data>
+  <data name="Dialog.DeleteMod.Text" xml:space="preserve">
+    <value>Are you sure you want to delete {0}?</value>
+  </data>
+  <data name="Notification.DeleteModFailed.Title" xml:space="preserve">
+    <value>Failed to delete mod</value>
+  </data>
+  <data name="Notification.ModDeleted.Title" xml:space="preserve">
+    <value>Mod deleted</value>
+  </data>
+  <data name="Notification.ModDeleted.Message" xml:space="preserve">
+    <value>{0} has been deleted</value>
+  </data>
+  <data name="Notification.PasteImageFailed.Title" xml:space="preserve">
+    <value>Failed to paste image</value>
+  </data>
+  <data name="Notification.PasteImageFailed.NoImage" xml:space="preserve">
+    <value>No image found in clipboard</value>
+  </data>
+  <data name="Dialog.DisableCharacter.Title" xml:space="preserve">
+    <value>Disable Character</value>
+  </data>
+  <data name="Dialog.DisableCharacter.Text" xml:space="preserve">
+    <value>Are you sure you want to disable this character? This will not delete the character, but UMManager will no longer recognize it. The character can be re-enabled later. Pressing &quot;Yes&quot; will take effect immediately.</value>
+  </data>
+  <data name="Dialog.DisableCharacter.DeleteFolder" xml:space="preserve">
+    <value>Delete Character folder and its contents/Mods?
+Files will be permanently deleted!</value>
+  </data>
+  <data name="Dialog.DisableCharacter.Primary" xml:space="preserve">
+    <value>Yes, disable this character</value>
+  </data>
+  <data name="Dialog.DeleteCharacter.Title" xml:space="preserve">
+    <value>Delete Character</value>
+  </data>
+  <data name="Dialog.DeleteCharacter.Text" xml:space="preserve">
+    <value>Are you sure you want to delete this custom character? This will remove the character and UMManager will no longer recognize it. Pressing &quot;Yes&quot; will take effect immediately.</value>
+  </data>
+  <data name="Dialog.DeleteCharacter.DeleteFolder" xml:space="preserve">
+    <value>Delete Custom Character folder and its contents/Mods?
+Files will be permanently deleted!</value>
+  </data>
+  <data name="Dialog.DeleteCharacter.Primary" xml:space="preserve">
+    <value>Yes, delete this character</value>
+  </data>
+  <data name="Dialog.EnableCharacter.Title" xml:space="preserve">
+    <value>Enable Character</value>
+  </data>
+  <data name="Dialog.EnableCharacter.Text" xml:space="preserve">
+    <value>Are you sure you want to enable this character? Pressing &quot;Yes&quot; will take effect immediately.</value>
+  </data>
+  <data name="Dialog.EnableCharacter.Primary" xml:space="preserve">
+    <value>Yes, enable this character</value>
+  </data>
+  <data name="Notification.CharacterDeleted.Title" xml:space="preserve">
+    <value>Character Deleted</value>
+  </data>
+  <data name="Notification.CharacterDeleted.Message" xml:space="preserve">
+    <value>Character '{0}' was deleted successfully</value>
+  </data>
+  <data name="Notification.SaveCharacterFailed.Title" xml:space="preserve">
+    <value>Failed to save changes to character</value>
+  </data>
+  <data name="Notification.CreateCharacterFailed.Title" xml:space="preserve">
+    <value>Failed to create character</value>
+  </data>
+  <data name="Notification.CreateCharacterEnableModListFailed.Title" xml:space="preserve">
+    <value>Character created, but failed to enable mod list for character</value>
+  </data>
+  <data name="Notification.CharacterCreated.Title" xml:space="preserve">
+    <value>Character created</value>
+  </data>
+  <data name="Notification.CharacterCreated.Message" xml:space="preserve">
+    <value>Character '{0}' was created successfully</value>
+  </data>
+  <data name="Dialog.CharacterJsonExport.Title" xml:space="preserve">
+    <value>Character Model Json Export</value>
+  </data>
+  <data name="Dialog.CharacterJsonExport.Primary" xml:space="preserve">
+    <value>Copy to clipboard and Close</value>
+  </data>
+  <data name="Notification.CreateJsonExportFailed.Title" xml:space="preserve">
+    <value>Failed to create json export</value>
+  </data>
+  <data name="Notification.CharacterJsonCopied.Title" xml:space="preserve">
+    <value>Character json copied to clipboard</value>
+  </data>
+  <data name="Notification.Restarting.Title" xml:space="preserve">
+    <value>Restarting...</value>
+  </data>
+  <data name="Notification.Restarting.Message" xml:space="preserve">
+    <value>The application will restart now.</value>
+  </data>
+  <data name="Dialog.ReorganizeMods.Title" xml:space="preserve">
+    <value>Reorganize Mods?</value>
+  </data>
+  <data name="Dialog.ReorganizeMods.Text" xml:space="preserve">
+    <value>Do you want to reorganize the Mods folder? UMManager will move mods located directly in the Mods and Others folders into character folders. Mods that cannot be matched will be moved into &quot;Others&quot;. Mods already inside &quot;Others&quot; will remain there.</value>
+  </data>
+  <data name="Notification.ModsReorganizationFailed.Title" xml:space="preserve">
+    <value>Mods reorganization failed.</value>
+  </data>
+  <data name="Notification.SeeLogs.Message" xml:space="preserve">
+    <value>See logs for more details.</value>
+  </data>
+  <data name="Notification.ModsReorganized.Title" xml:space="preserve">
+    <value>Mods reorganized.</value>
+  </data>
+  <data name="Notification.MovedModsToCharacterFolders.Message" xml:space="preserve">
+    <value>Moved {0} mods to character folders</value>
+  </data>
+  <data name="Dialog.ExportMods.Title" xml:space="preserve">
+    <value>Export Mods</value>
+  </data>
+  <data name="Notification.ModsExported.Title" xml:space="preserve">
+    <value>Mods exported</value>
+  </data>
+  <data name="Notification.ModsExported.Message" xml:space="preserve">
+    <value>Mods exported to {0}</value>
+  </data>
+  <data name="Notification.ErrorExportingMods.Title" xml:space="preserve">
+    <value>Error exporting mods</value>
+  </data>
+  <data name="Dialog.ChangeLanguage.Title" xml:space="preserve">
+    <value>Restart Required</value>
+  </data>
+  <data name="Dialog.ChangeLanguage.Primary" xml:space="preserve">
+    <value>Change Language and restart</value>
+  </data>
+  <data name="Dialog.SwitchGame.Title" xml:space="preserve">
+    <value>Switch Game</value>
+  </data>
+  <data name="Dialog.SwitchGame.Text" xml:space="preserve">
+    <value>Switching games will restart the application.
+This is required to ensure that the application is configured correctly for the selected game.
+
+Do you want to switch games?</value>
+  </data>
+  <data name="Dialog.SwitchGame.Primary" xml:space="preserve">
+    <value>Switch to {0}</value>
+  </data>
+  <data name="Notification.ErrorStartingUpdateProcess.Title" xml:space="preserve">
+    <value>Error starting update process</value>
+  </data>
+  <data name="Notification.CouldNotStartUpdateProcess.Title" xml:space="preserve">
+    <value>Could not start update process</value>
+  </data>
+  <data name="Notification.LogFileNotFound.Title" xml:space="preserve">
+    <value>Log file not found</value>
+  </data>
+  <data name="Notification.LogFileCouldNotBeOpened.Title" xml:space="preserve">
+    <value>Log file could not be opened</value>
+  </data>
+  <data name="Notification.ElevatorNotRunning.Title" xml:space="preserve">
+    <value>Elevator is not running</value>
+  </data>
+  <data name="Notification.ElevatorNotRunning.Message" xml:space="preserve">
+    <value>Please start the Elevator first in the Settings page</value>
+  </data>
+  <data name="Dialog.PresetsHowWork.Title" xml:space="preserve">
+    <value>How presets work</value>
+  </data>
+  <data name="Dialog.PresetsHowWork.Text" xml:space="preserve">
+    <value>Presets are a list of mods to enable and their preferences (eg .UMManager_ModConfig.json)
+
+When a preset is created, the currently enabled mods and their preferences are saved
+
+UMManager can handle 3Dmigoto overrides by starting the Elevator and enabling Auto Sync, which will automatically refresh active mods in the game
+
+You can also use UMManager without presets by using the manual controls for persisting preferences.</value>
+  </data>
+  <data name="Dialog.AdminWarning.Title" xml:space="preserve">
+    <value>Running as Administrator Warning</value>
+  </data>
+  <data name="Dialog.AdminWarning.Text" xml:space="preserve">
+    <value>You are running UMManager as an Administrator. This is not recommended.
+
+When running as Administrator, the program has full access to your system and can potentially cause damage if something goes wrong.
+
+Please restart the application without Administrator privileges.</value>
+  </data>
+  <data name="Dialog.NewFolderStructure.Title" xml:space="preserve">
+    <value>New Folder structure</value>
+  </data>
+  <data name="Dialog.NewFolderStructure.Primary" xml:space="preserve">
+    <value>Reorganize my mods</value>
+  </data>
+  <data name="Dialog.NewFolderStructure.Secondary" xml:space="preserve">
+    <value>I will do it myself</value>
+  </data>
+  <data name="Dialog.CharacterSkins.EnableTitle" xml:space="preserve">
+    <value>Enable Character Skins as Characters?</value>
+  </data>
+  <data name="Dialog.CharacterSkins.EnableText" xml:space="preserve">
+    <value>Enabling this will make UMManager treat in game skins as separate characters in the character overview.
+This could potentially become the default setting of UMManager in the future.
+UMManager will not move any of your mods nor will it delete any.
+
+Are you sure you want to enable character skins as characters? UMManager will restart afterwards...</value>
+  </data>
+  <data name="Dialog.CharacterSkins.DisableTitle" xml:space="preserve">
+    <value>Disable Character Skins as Characters?</value>
+  </data>
+  <data name="Dialog.CharacterSkins.DisableText" xml:space="preserve">
+    <value>Disabling this will make UMManager treat in game skins as skins of the base character in the character overview.
+This is currently the default setting of UMManager.
+UMManager will not move any of your mods nor will it delete any.
+
+Are you sure you want to disable character skins as characters? UMManager will restart afterwards...</value>
+  </data>
+  <data name="Dialog.ThemeRestartRequired.Title" xml:space="preserve">
+    <value>Restart required</value>
+  </data>
+  <data name="Dialog.ThemeRestartRequired.Text" xml:space="preserve">
+    <value>You'll need to restart UMManager for the theme to apply. Otherwise the app may become unstable as this is likely due to incomplete theme configuration. I recommend using dark mode.
+
+Sorry for the inconvenience.</value>
+  </data>
+  <data name="Notification.ProcessKillFailed.Title" xml:space="preserve">
+    <value>Failed to kill process</value>
+  </data>
+  <data name="Notification.ProcessNotRunning.Title" xml:space="preserve">
+    <value>Process is not running</value>
+  </data>
+  <data name="Notification.ProcessKilledSuccessfully.Title" xml:space="preserve">
+    <value>Process killed successfully</value>
+  </data>
+  <data name="Notification.GetCommandFailed.Title" xml:space="preserve">
+    <value>Failed to get command</value>
+  </data>
+  <data name="Notification.CommandNotFound.Message" xml:space="preserve">
+    <value>Command not found</value>
+  </data>
+  <data name="Notification.DeleteCommandFailed.Title" xml:space="preserve">
+    <value>Failed to delete command</value>
+  </data>
+  <data name="Notification.CommandDeletedSuccessfully.Title" xml:space="preserve">
+    <value>Command '{0}' deleted successfully</value>
+  </data>
+  <data name="Common.Button.Create" xml:space="preserve">
+    <value>Create</value>
+  </data>
+  <data name="Common.Button.GotIt" xml:space="preserve">
+    <value>Got it</value>
+  </data>
+  <data name="Common.Button.Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="Dialog.UpdateModsFolder.Title" xml:space="preserve">
+    <value>Update folder path?</value>
+  </data>
+  <data name="Dialog.UpdateModsFolder.Text" xml:space="preserve">
+    <value>Do you want to save the new Mods folder path? The application will restart automatically.</value>
+  </data>
+  <data name="Dialog.StartElevator.Title" xml:space="preserve">
+    <value>Start Elevator Process?</value>
+  </data>
+  <data name="Dialog.StartElevator.Text" xml:space="preserve">
+    <value>Press Start to launch the Elevator. The Elevator is an elevated (admin) process that is used for communication with the Genshin game process.
+
+While the Elevator is active, you can press F10 within this app to refresh active mods in Genshin.
+
+Enabling and disabling mods will also automatically refresh active mods in Genshin.
+The Elevator process should automatically close when this program is closed.
+
+After pressing Start, a User Account Control (UAC) prompt will appear to confirm the elevation.
+
+(Pressing F10 requires that Genshin and 3DMigoto are running.)
+
+Check the FAQ on GitHub to download it separately, as it may be flagged as malware.</value>
+  </data>
+  <data name="Dialog.ChangeLanguage.Text" xml:space="preserve">
+    <value>Changing the language requires a restart of the application.
+This is required to ensure that the application is configured correctly for the selected language.
+
+Do you want to change the language?</value>
+  </data>
+  <data name="Dialog.CharacterModel.Title" xml:space="preserve">
+    <value>Character Model</value>
+  </data>
+  <data name="Dialog.DeleteSkin.Title" xml:space="preserve">
+    <value>Delete Skin</value>
+  </data>
+  <data name="Dialog.DeleteSkin.Text" xml:space="preserve">
+    <value>Are you sure you want to delete the skin “{0}”?</value>
+  </data>
+  <data name="Notification.ElevatorStartFailed.Title" xml:space="preserve">
+    <value>Failed to start Elevator</value>
+  </data>
+  <data name="Notification.GenericError.Title" xml:space="preserve">
+    <value>An error occurred</value>
+  </data>
+  <data name="Notification.ModSettings.SaveFailed.Title" xml:space="preserve">
+    <value>Failed to save settings for mod {0}</value>
+  </data>
+  <data name="Notification.ModSettings.SaveFailed.Message" xml:space="preserve">
+    <value>An error occurred. Reason: {0}</value>
+  </data>
+  <data name="Notification.ModSettings.FileNotFound.Title" xml:space="preserve">
+    <value>Could not find settings file for mod {0}</value>
+  </data>
+  <data name="Notification.ModSettings.ReadFailed.Title" xml:space="preserve">
+    <value>Failed to read settings for mod {0}</value>
+  </data>
+  <data name="Notification.ModSettings.ReadFailed.Message" xml:space="preserve">
+    <value>An error occurred. Reason: {0}</value>
+  </data>
+  <data name="Notification.ModSettings.NoChanges.Title" xml:space="preserve">
+    <value>No changes were detected</value>
+  </data>
+  <data name="Notification.ModSettings.NoChanges.Message" xml:space="preserve">
+    <value>Mod settings not updated</value>
+  </data>
+  <data name="Notification.ModSettings.Updated.Title" xml:space="preserve">
+    <value>Mod settings updated</value>
+  </data>
+  <data name="Notification.ModSettings.Updated.Message" xml:space="preserve">
+    <value>Mod settings have been updated for {0}</value>
+  </data>
+  <data name="Notification.ModSettings.ModNotFound.Title" xml:space="preserve">
+    <value>Could not find mod</value>
+  </data>
+  <data name="Notification.ModSettings.ModSettingsNotFound.Title" xml:space="preserve">
+    <value>Could not find mod settings</value>
+  </data>
+  <data name="Notification.ModSettings.SetIni.GenericErrorMessage" xml:space="preserve">
+    <value>An error occurred trying to set Mod ini. Restarting UMManager may help.</value>
+  </data>
+  <data name="Notification.ModSettings.SetIni.InvalidPath.Title" xml:space="preserve">
+    <value>Invalid Mod ini path</value>
+  </data>
+  <data name="Notification.ModSettings.SetIni.InvalidPath.Message" xml:space="preserve">
+    <value>An error occurred trying to parse the path to the .ini</value>
+  </data>
+  <data name="Notification.ModSettings.SetIni.FileMissing.Title" xml:space="preserve">
+    <value>Mod ini file does not exist</value>
+  </data>
+  <data name="Notification.ModSettings.SetIni.FileMissing.Message" xml:space="preserve">
+    <value>Could not find file at {0}</value>
+  </data>
+  <data name="Notification.ModSettings.SetIni.NotInFolder.Title" xml:space="preserve">
+    <value>Mod ini file is not in mod folder</value>
+  </data>
+  <data name="Notification.ModSettings.SetIni.NotInFolder.Message" xml:space="preserve">
+    <value>The mod ini file must be in the mod folder. Mod folder: {0}
+Ini path: {1}</value>
+  </data>
+  <data name="Notification.ModInstaller.Installed.Title" xml:space="preserve">
+    <value>Mod '{0}' installed</value>
+  </data>
+  <data name="Notification.ModInstaller.Installed.Message" xml:space="preserve">
+    <value>Mod '{0}' ({1}) was successfully added to {2} ModList</value>
+  </data>
+  <data name="Notification.ModInstaller.Added.ShortMessage" xml:space="preserve">
+    <value>Mod was successfully added</value>
+  </data>
+  <data name="Notification.ModInstaller.SkinUndetected.Title" xml:space="preserve">
+    <value>Could not determine skin for new mod</value>
+  </data>
+  <data name="Notification.ModInstaller.SkinUndetected.Message" xml:space="preserve">
+    <value>UMManager could not determine what in-game skin this mod is for, therefore it can't determine what mods to disable.</value>
+  </data>
+  <data name="Dialog.ModsFolderNotEmpty.Title" xml:space="preserve">
+    <value>Mods folder is not empty</value>
+  </data>
+  <data name="Dialog.ModsFolderNotEmpty.Text" xml:space="preserve">
+    <value>The selected Mods folder must be empty. Please empty this folder and then save again. Afterwards, import your mods into the corresponding character folders.</value>
+  </data>
+  <data name="Notification.StartupSettingsSaved.Title" xml:space="preserve">
+    <value>Startup settings saved</value>
+  </data>
+  <data name="Notification.StartupSettingsSaved.Message" xml:space="preserve">
+    <value>Startup settings have been saved to “{0}”.</value>
+  </data>
+  <data name="Notification.CharacterSkinImage.SetFailed.Title" xml:space="preserve">
+    <value>Failed to set skin image</value>
+  </data>
+  <data name="Notification.CharacterSkinImage.InvalidClipboardFile.Message" xml:space="preserve">
+    <value>The clipboard image is not a valid local file.</value>
+  </data>
+  <data name="Notification.CharacterSkin.Added.Title" xml:space="preserve">
+    <value>Skin added</value>
+  </data>
+  <data name="Notification.CharacterSkin.Added.Message" xml:space="preserve">
+    <value>A new skin category has been added.</value>
+  </data>
+  <data name="Notification.CharacterSkin.AddFailed.Title" xml:space="preserve">
+    <value>Failed to add skin</value>
+  </data>
+  <data name="Notification.CharacterSkin.Deleted.Title" xml:space="preserve">
+    <value>Skin deleted</value>
+  </data>
+  <data name="Notification.CharacterSkin.Deleted.Message" xml:space="preserve">
+    <value>The skin category has been deleted.</value>
+  </data>
+  <data name="Notification.CharacterSkin.DeleteFailed.Title" xml:space="preserve">
+    <value>Failed to delete skin</value>
+  </data>
+  <data name="Notification.CharacterSkin.RenameSuccess.Title" xml:space="preserve">
+    <value>Skin name updated</value>
+  </data>
+  <data name="Notification.CharacterSkin.RenameFailed.Title" xml:space="preserve">
+    <value>Failed to update skin name</value>
+  </data>
+  <data name="Notification.ModToggle.EnableError.Title" xml:space="preserve">
+    <value>An error occurred enabling the mod: {0}</value>
+  </data>
+  <data name="Notification.ModToggle.DisableError.Title" xml:space="preserve">
+    <value>An error occurred disabling the mod: {0}</value>
+  </data>
+  <data name="Common.Button.Hide" xml:space="preserve">
+    <value>Hide</value>
+  </data>
+  <data name="Common.Button.Remove" xml:space="preserve">
+    <value>Remove</value>
+  </data>
+  <data name="Common.Button.Set" xml:space="preserve">
+    <value>Set</value>
+  </data>
+  <data name="Common.Button.SetImage" xml:space="preserve">
+    <value>Set image</value>
+  </data>
+  <data name="Common.Button.Show" xml:space="preserve">
+    <value>Show</value>
+  </data>
+  <data name="Dialog.LaunchFailed.Generic.Title" xml:space="preserve">
+    <value>Unable to open</value>
+  </data>
+  <data name="Dialog.LaunchFailed.Path.Title" xml:space="preserve">
+    <value>Unable to open path</value>
+  </data>
+  <data name="Dialog.LaunchFailed.Uri.Title" xml:space="preserve">
+    <value>Unable to open link</value>
+  </data>
+  <data name="Dialog.UiCategory.BulkRemove.Text" xml:space="preserve">
+    <value>Remove {1} characters from category “{0}”?</value>
+  </data>
+  <data name="Dialog.UiCategory.BulkRemove.Title" xml:space="preserve">
+    <value>Bulk remove</value>
+  </data>
+  <data name="Dialog.UiCategory.Create.Title" xml:space="preserve">
+    <value>Create category</value>
+  </data>
+  <data name="Dialog.UiCategory.Delete.Text" xml:space="preserve">
+    <value>Are you sure you want to delete the category “{0}”? This will also delete its image and remove this category tag from all characters.</value>
+  </data>
+  <data name="Dialog.UiCategory.Delete.Title" xml:space="preserve">
+    <value>Delete category</value>
+  </data>
+  <data name="Dialog.UiCategory.Edit.Title" xml:space="preserve">
+    <value>Edit category</value>
+  </data>
+  <data name="Dialog.UiCategory.Image.NotSelected" xml:space="preserve">
+    <value>No image selected</value>
+  </data>
+  <data name="Dialog.UiCategory.Image.Pick" xml:space="preserve">
+    <value>Choose image</value>
+  </data>
+  <data name="Dialog.UiCategory.Image.Remove" xml:space="preserve">
+    <value>Remove image</value>
+  </data>
+  <data name="Dialog.UiCategory.Name.Header" xml:space="preserve">
+    <value>Category name</value>
+  </data>
+  <data name="Dialog.UiCategory.Name.Placeholder" xml:space="preserve">
+    <value>Enter category name</value>
+  </data>
+  <data name="Notification.Character.DisableModsFailed.Title" xml:space="preserve">
+    <value>Failed to disable mods</value>
+  </data>
+  <data name="Notification.Character.ModsDisabled.Title" xml:space="preserve">
+    <value>Mods disabled</value>
+  </data>
+  <data name="Notification.Character.ModsDisabled.Message" xml:space="preserve">
+    <value>Disabled all mods for {0}.</value>
+  </data>
+  <data name="Notification.Command.Created.Title" xml:space="preserve">
+    <value>Command '{0}' created successfully.</value>
+  </data>
+  <data name="Notification.Command.RunFailed.Title" xml:space="preserve">
+    <value>An error occurred running command {0}</value>
+  </data>
+  <data name="Notification.Command.Updated.Title" xml:space="preserve">
+    <value>Command '{0}' updated successfully.</value>
+  </data>
+  <data name="Notification.Clipboard.GetImageFailed.Title" xml:space="preserve">
+    <value>Could not get image from clipboard</value>
+  </data>
+  <data name="Notification.Clipboard.NoValidImage.Title" xml:space="preserve">
+    <value>The clipboard does not contain a valid image</value>
+  </data>
+  <data name="Notification.GameBanana.InvalidUrl.Title" xml:space="preserve">
+    <value>Invalid GameBanana mod URL</value>
+  </data>
+  <data name="Notification.GameBanana.OpenModPageFailed.Title" xml:space="preserve">
+    <value>Failed to open mod page</value>
+  </data>
+  <data name="Notification.KeySwap.LoadFailed.Title" xml:space="preserve">
+    <value>Failed to load keyswaps for mod {0}</value>
+  </data>
+  <data name="Notification.KeySwap.SaveFailed.Title" xml:space="preserve">
+    <value>Failed to save key swaps</value>
+  </data>
+  <data name="Notification.KeySwap.SaveFailed.Message" xml:space="preserve">
+    <value>Failed to save key swap configuration for {0}. Reason: {1}</value>
+  </data>
+  <data name="Notification.ModDragDrop.AddFailed.Title" xml:space="preserve">
+    <value>Failed to add mod</value>
+  </data>
+  <data name="Notification.ModPane.CopiedFolderPath.Title" xml:space="preserve">
+    <value>Copied mod folder path to clipboard</value>
+  </data>
+  <data name="Notification.ModPane.LoadFailed.Title" xml:space="preserve">
+    <value>Failed to load mod</value>
+  </data>
+  <data name="Notification.NotImplemented.HideCharacter.Message" xml:space="preserve">
+    <value>Hiding characters is not supported yet.</value>
+  </data>
+  <data name="Notification.NotImplemented.Message" xml:space="preserve">
+    <value>This feature is not implemented yet.</value>
+  </data>
+  <data name="Notification.NotImplemented.Title" xml:space="preserve">
+    <value>Not implemented</value>
+  </data>
+  <data name="Notification.ProcessStartFailed.GenericMessage" xml:space="preserve">
+    <value>Failed to start {0}</value>
+  </data>
+  <data name="Notification.ProcessStartFailed.RequiresAdminMessage" xml:space="preserve">
+    <value>Failed to start {0}: the executable might be set to run as Administrator.</value>
+  </data>
+  <data name="Notification.ProcessStartFailed.Title" xml:space="preserve">
+    <value>Failed to start process</value>
+  </data>
+  <data name="Notification.ProcessStartFailed.UacCanceledMessage" xml:space="preserve">
+    <value>Failed to start {0}: the UAC prompt might have been canceled.</value>
+  </data>
+  <data name="Notification.ProcessStartFailed.UnknownMessage" xml:space="preserve">
+    <value>An unknown error occurred.</value>
+  </data>
+  <data name="Notification.RestartFailed.Manual.Message" xml:space="preserve">
+    <value>Please restart manually. Reason: {0}</value>
+  </data>
+  <data name="Notification.RestartFailed.ManualShort.Message" xml:space="preserve">
+    <value>Please restart manually.</value>
+  </data>
+  <data name="Notification.RestartFailed.Title" xml:space="preserve">
+    <value>Failed to restart application</value>
+  </data>
+  <data name="Notification.RestartFailed.TryLegacy.Message" xml:space="preserve">
+    <value>Will try the legacy restart method. Reason: {0}</value>
+  </data>
+  <data name="Notification.UiCategory.AddCharacterFailed.Title" xml:space="preserve">
+    <value>Add failed</value>
+  </data>
+  <data name="Notification.UiCategory.BulkRemove.None.Message" xml:space="preserve">
+    <value>There are no characters to remove from this category.</value>
+  </data>
+  <data name="Notification.UiCategory.BulkRemove.Title" xml:space="preserve">
+    <value>Bulk remove</value>
+  </data>
+  <data name="Notification.UiCategory.BulkRemoveCompleted.Message" xml:space="preserve">
+    <value>Removed {0} characters.</value>
+  </data>
+  <data name="Notification.UiCategory.BulkRemoveCompleted.Title" xml:space="preserve">
+    <value>Bulk remove completed</value>
+  </data>
+  <data name="Notification.UiCategory.BulkRemoveFailed.Title" xml:space="preserve">
+    <value>Bulk remove failed</value>
+  </data>
+  <data name="Notification.UiCategory.CreateFailed.Title" xml:space="preserve">
+    <value>Failed to create category</value>
+  </data>
+  <data name="Notification.UiCategory.EditFailed.Title" xml:space="preserve">
+    <value>Failed to update category</value>
+  </data>
+  <data name="Notification.UiCategory.HideFailed.Title" xml:space="preserve">
+    <value>Failed to hide category</value>
+  </data>
+  <data name="Notification.UiCategory.NameEmpty.Message" xml:space="preserve">
+    <value>Category name cannot be empty.</value>
+  </data>
+  <data name="Notification.UiCategory.RemoveCharacterFailed.Title" xml:space="preserve">
+    <value>Remove failed</value>
+  </data>
+  <data name="Notification.UnhandledException.Message" xml:space="preserve">
+    <value>The application may be unstable and could crash at any time. Restart is recommended.</value>
+  </data>
+  <data name="Notification.UnhandledException.Title" xml:space="preserve">
+    <value>Error!</value>
+  </data>
+  <data name="Tooltip.Character.SingleSkin" xml:space="preserve">
+    <value>This character only has one default in-game skin, so you can't change it.</value>
+  </data>
+  <data name="Window.ModDownloads.ForMod.Title" xml:space="preserve">
+    <value>Downloads for: {0}</value>
+  </data>
+  <data name="Window.ModDownloads.Title" xml:space="preserve">
+    <value>Download mod files</value>
+  </data>
+  <data name="Window.SelectMods.Title" xml:space="preserve">
+    <value>Select mods</value>
+  </data>
+  <data name="Window.UnhandledException.Title" xml:space="preserve">
+    <value>UMManager - Unhandled exception</value>
+  </data>
+  <data name="Common.Button.Select" xml:space="preserve">
+    <value>Select</value>
+  </data>
+  <data name="Common.Button.SelectFolder" xml:space="preserve">
+    <value>Select folder</value>
+  </data>
+  <data name="Notification.Command.CreateFailed.Title" xml:space="preserve">
+    <value>Failed to create command</value>
+  </data>
+  <data name="Notification.Command.UpdateFailed.Title" xml:space="preserve">
+    <value>Failed to update command</value>
+  </data>
+  <data name="Notification.SaveImageFailed.Title" xml:space="preserve">
+    <value>Failed to save image</value>
+  </data>
+</root>

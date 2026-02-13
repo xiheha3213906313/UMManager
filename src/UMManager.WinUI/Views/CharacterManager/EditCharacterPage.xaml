@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Page
+    x:Class="UMManager.WinUI.Views.CharacterManager.EditCharacterPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:characterManagerViewModels="using:UMManager.WinUI.ViewModels.CharacterManagerViewModels"
+    xmlns:controls="using:UMManager.WinUI.Views.Controls"
+    xmlns:controls1="using:CommunityToolkit.WinUI.UI.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="using:UMManager.WinUI.Views.CharacterManager"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewModels="using:UMManager.WinUI.ViewModels"
+    x:Name="EditCharacterPageRoot"
+    mc:Ignorable="d">
+
+    <Grid
+        x:Name="EditCharacterPageGrid"
+        Padding="4"
+        Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+        CornerRadius="10">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid Margin="0,0,0,4" ColumnSpacing="12">
+            <Grid.ColumnDefinitions>
+
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <controls:LinkButton
+                Link="{x:Bind ViewModel.ModFolderUri, Mode=TwoWay}"
+                ToolTipService.ToolTip="{x:Bind ViewModel.ModFolderString, Mode=OneWay}"
+                Text="打开模组文件夹" />
+
+            <StackPanel
+                Grid.Column="2"
+                HorizontalAlignment="Right"
+                Orientation="Horizontal"
+                Spacing="8">
+                <Button
+                    Command="{x:Bind ViewModel.DisableCharacterCommand, Mode=OneWay}"
+                    Content="禁用角色"
+                    IsEnabled="{x:Bind ViewModel.CharacterStatus.IsEnabled, Mode=OneWay}"
+                    Background="{ThemeResource ControlFillColorSecondaryBrush}"
+                    ToolTipService.ToolTip="将先弹出包含更多信息的提示"
+                    Visibility="{x:Bind ViewModel.CharacterStatus.IsEnabled, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}" />
+
+                <Button
+                    Command="{x:Bind ViewModel.EnableCharacterCommand, Mode=OneWay}"
+                    Content="启用角色"
+                    IsEnabled="{x:Bind ViewModel.CharacterStatus.IsDisabled, Mode=OneWay}"
+                    Background="{ThemeResource ControlFillColorTertiaryBrush}"
+                    ToolTipService.ToolTip="该角色当前已禁用，点击可恢复启用"
+                    Visibility="{x:Bind ViewModel.CharacterStatus.IsDisabled, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}" />
+
+                <Button Command="{x:Bind ViewModel.AddSkinCommand}" Content="添加皮肤" />
+
+                <Button Command="{x:Bind ViewModel.GoToCharacterCommand}" Content="前往角色页面" />
+
+                <Button
+                    Command="{x:Bind ViewModel.DeleteCharacterCommand, Mode=OneWay}"
+                    Content="删除角色"
+                    ToolTipService.ToolTip="将先弹出包含更多信息的提示" />
+            </StackPanel>
+
+
+
+        </Grid>
+
+        <Grid Grid.Row="1" ColumnSpacing="12">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="320" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="0" RowSpacing="12">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <StackPanel Grid.Row="0" Spacing="12">
+                    <local:InputWrapper InputField="{x:Bind ViewModel.Form.Image}">
+                        <local:InputWrapper.Input>
+                            <controls:CustomImage
+                                Width="300"
+                                Height="200"
+                                ButtonHorizontalAlignment="Left"
+                                ClearButtonCommand="{x:Bind ViewModel.ClearImageCommand}"
+                                CopyButtonVisibility="Collapsed"
+                                EditButtonCommand="{x:Bind ViewModel.PickImageCommand}"
+                                ImageUri="{x:Bind ViewModel.ActiveSkinImageUri, Mode=TwoWay}"
+                                IsContextMenuEnabled="True"
+                                PasteButtonCommand="{x:Bind ViewModel.PasteImageCommand}" />
+                        </local:InputWrapper.Input>
+                    </local:InputWrapper>
+
+                    <StackPanel
+                        Orientation="Horizontal"
+                        Spacing="8"
+                        Visibility="{x:Bind ViewModel.HasExtraSkins, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}">
+                        <Button Command="{x:Bind ViewModel.NextSkinCommand}" ToolTipService.ToolTip="切换皮肤">
+                            <SymbolIcon Symbol="RepeatAll" />
+                        </Button>
+                        <Button
+                            Command="{x:Bind ViewModel.DeleteSkinCommand}"
+                            IsEnabled="{x:Bind ViewModel.CanDeleteActiveSkin, Mode=OneWay}"
+                            ToolTipService.ToolTip="删除当前皮肤">
+                            <SymbolIcon Symbol="Delete" />
+                        </Button>
+                        <TextBox
+                            MinWidth="140"
+                            VerticalAlignment="Center"
+                            IsEnabled="{x:Bind ViewModel.CanRenameActiveSkin, Mode=OneWay}"
+                            Opacity="0.9"
+                            Text="{x:Bind ViewModel.ActiveSkinDisplayNameEdit, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                        <Button
+                            Command="{x:Bind ViewModel.SaveActiveSkinNameCommand}"
+                            IsEnabled="{x:Bind ViewModel.CanRenameActiveSkin, Mode=OneWay}"
+                            ToolTipService.ToolTip="保存皮肤名称">
+                            <SymbolIcon Symbol="Save" />
+                        </Button>
+                    </StackPanel>
+
+                    <Grid ColumnSpacing="12">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Orientation="Horizontal" Spacing="6">
+                            <TextBlock Text="模组数：" />
+                            <TextBlock FontSize="20" Text="{x:Bind ViewModel.ModsCount, Mode=OneWay}" />
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="6">
+                            <TextBlock Text="启用模组数：" />
+                            <TextBlock FontSize="20" Text="{x:Bind ViewModel.EnabledModsCount, Mode=OneWay}" />
+                        </StackPanel>
+                    </Grid>
+                </StackPanel>
+
+                <StackPanel Grid.Row="1" Spacing="8">
+                    <TextBlock FontSize="16" Text="模组列表" />
+                    <ListView
+                        ItemsSource="{x:Bind ViewModel.Mods}"
+                        SelectionMode="None">
+                        <ListView.ItemTemplate>
+                            <DataTemplate x:DataType="characterManagerViewModels:ModModel">
+                                <Grid
+                                    Padding="4"
+                                    Background="{ThemeResource ControlFillColorSecondaryBrush}"
+                                    ColumnSpacing="16">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition />
+                                        <ColumnDefinition />
+                                    </Grid.ColumnDefinitions>
+
+                                    <TextBlock
+                                        Grid.Column="1"
+                                        HorizontalAlignment="Right"
+                                        IsTextSelectionEnabled="True"
+                                        ToolTipService.ToolTip="添加到应用的日期"
+                                        Text="{x:Bind DateAdded}" />
+
+                                    <TextBlock
+                                        Grid.Column="0"
+                                        HorizontalAlignment="Left"
+                                        IsTextSelectionEnabled="True"
+                                        TextTrimming="CharacterEllipsis"
+                                        ToolTipService.ToolTip="{x:Bind Path=DisplayName}"
+                                        Text="{x:Bind DisplayName}" />
+                                </Grid>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </StackPanel>
+            </Grid>
+
+            <Grid Grid.Column="1" RowSpacing="12">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <ScrollViewer Grid.Row="0">
+                    <StackPanel Spacing="12">
+                        <local:InputWrapper InputField="{x:Bind ViewModel.Form.DisplayName}">
+                            <local:InputWrapper.Input>
+                                <Grid ColumnSpacing="8">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock VerticalAlignment="Center" Text="角色名称" />
+                                    <TextBox
+                                        Grid.Column="1"
+                                        PlaceholderText="{x:Bind ViewModel.Form.DisplayName.PlaceHolderText, Mode=OneWay}"
+                                        Text="{x:Bind ViewModel.Form.DisplayName.Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                </Grid>
+                            </local:InputWrapper.Input>
+                        </local:InputWrapper>
+
+                        <StackPanel
+                            VerticalAlignment="Center"
+                            Background="{ThemeResource ControlFillColorSecondaryBrush}"
+                            Orientation="Horizontal"
+                            Spacing="8">
+                            <TextBlock Text="角色ID：" />
+                            <TextBox
+                                MinWidth="180"
+                                Text="{x:Bind ViewModel.Form.InternalName.Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                ToolTipService.ToolTip="角色ID" />
+                        </StackPanel>
+
+                        <local:InputWrapper InputField="{x:Bind ViewModel.Form.Rarity}">
+                            <local:InputWrapper.Input>
+                                <StackPanel Orientation="Horizontal" Spacing="16">
+                                    <Slider
+                                        Width="240"
+                                        Header="稀有度"
+                                        Maximum="6"
+                                        Minimum="0"
+                                        SnapsTo="Ticks"
+                                        TickFrequency="1"
+                                        TickPlacement="Outside"
+                                        Value="{x:Bind ViewModel.Form.Rarity.Value, Mode=TwoWay}" />
+                                    <TextBlock VerticalAlignment="Center" Text="{x:Bind ViewModel.Form.Rarity.Value, Mode=OneWay}" />
+                                </StackPanel>
+                            </local:InputWrapper.Input>
+                        </local:InputWrapper>
+
+                        <local:InputWrapper InputField="{x:Bind ViewModel.Form.IsMultiMod}">
+                            <local:InputWrapper.Input>
+                                <CheckBox Content="允许多个模组同时启用" IsChecked="{x:Bind ViewModel.Form.IsMultiMod.Value, Mode=TwoWay}" />
+                            </local:InputWrapper.Input>
+                        </local:InputWrapper>
+                    </StackPanel>
+                </ScrollViewer>
+
+                <Grid
+                    Grid.Row="1"
+                    ColumnSpacing="8">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <Button
+                        HorizontalAlignment="Left"
+                        Command="{x:Bind ViewModel.ShowCharacterModelCommand}">
+                        <Button.Content>
+                            <TextBlock TextWrapping="WrapWholeWords" Text="查看角色数据模型..." />
+                        </Button.Content>
+                    </Button>
+
+                    <StackPanel
+                        Grid.Column="1"
+                        HorizontalAlignment="Right"
+                        Orientation="Horizontal"
+                        Spacing="8">
+                    <Button
+                        Width="120"
+                        Command="{x:Bind ViewModel.RevertChangesCommand}"
+                        Content="撤销更改"
+                        ToolTipService.ToolTip="撤销未保存的更改" />
+
+                    <Button
+                        Width="120"
+                        Background="{ThemeResource AccentFillColorDefaultBrush}"
+                        Command="{x:Bind ViewModel.SaveChangesCommand}"
+                        Content="保存更改"
+                        ToolTipService.ToolTip="将更改保存到磁盘" />
+                    </StackPanel>
+                </Grid>
+            </Grid>
+        </Grid>
+
+    </Grid>
+</Page>

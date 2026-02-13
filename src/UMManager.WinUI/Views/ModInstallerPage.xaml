@@ -1,0 +1,424 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Page
+    x:Class="UMManager.WinUI.Views.ModInstallerPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="using:UMManager.WinUI.Views.Controls"
+    xmlns:converters="using:CommunityToolkit.WinUI.UI.Converters"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="using:UMManager.WinUI.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewModels="using:UMManager.WinUI.ViewModels"
+    mc:Ignorable="d">
+
+
+
+    <Page.Resources>
+
+        <converters:BoolNegationConverter x:Key="BoolNegationConverter" />
+        <MenuFlyout x:Name="FileFlyout">
+            <MenuFlyoutItem
+                Command="{x:Bind ViewModel.SetModPreviewImageCommand, Mode=OneWay}"
+                CommandParameter="{Binding}"
+                Text="设置模组预览图" />
+        </MenuFlyout>
+
+        <MenuFlyout x:Name="FolderFlyout">
+            <MenuFlyoutItem
+                Command="{x:Bind ViewModel.SetRootFolderCommand, Mode=OneWay}"
+                CommandParameter="{Binding}"
+                Text="设置模组根目录" />
+            <!--  TODO: Enable Later  -->
+            <MenuFlyoutItem
+                Command="{x:Bind ViewModel.SetShaderFixesFolderCommand}"
+                CommandParameter="{Binding}"
+                Visibility="Collapsed"
+                Text="设置 ShaderFixes 文件夹" />
+        </MenuFlyout>
+
+        <DataTemplate x:Key="RootFolderTemplate" x:DataType="viewModels:RootFolder">
+            <TreeViewItem
+                DoubleTapped="RootFolder_DoubleClicked"
+                IsExpanded="True"
+                ItemsSource="{x:Bind FileSystemItems, Mode=OneWay}">
+                <StackPanel Orientation="Horizontal">
+                    <FontIcon Margin="0,0,4,0" Glyph="&#xED25;" />
+                    <TextBlock Text="{x:Bind Name}" />
+                </StackPanel>
+            </TreeViewItem>
+        </DataTemplate>
+
+        <DataTemplate x:Key="FileSystemItemTemplate" x:DataType="viewModels:FileSystemItem">
+            <TreeViewItem
+                IsExpanded="{x:Bind IsExpanded, Mode=TwoWay}"
+                IsSelected="{x:Bind IsSelected, Mode=TwoWay}"
+                ItemsSource="{x:Bind FileSystemItems, Mode=OneWay}"
+                Loaded="FrameworkElement_OnLoaded">
+                <Grid DoubleTapped="FileSystemItem_DoubleClicked">
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <FontIcon Margin="0,0,4,0" Glyph="{x:Bind LeftIcon, Mode=OneWay}" />
+
+
+                    <TextBlock Grid.Column="1" Text="{x:Bind Name}" />
+
+
+                    <StackPanel Grid.Column="2" Orientation="Horizontal">
+                        <FontIcon Margin="0,0,12,0" Glyph="{x:Bind RightIcon, Mode=OneWay}" />
+                    </StackPanel>
+
+                </Grid>
+            </TreeViewItem>
+        </DataTemplate>
+
+
+        <local:ExplorerItemTemplateSelector
+            x:Key="ExplorerItemTemplateSelector"
+            FileSystemItem="{StaticResource FileSystemItemTemplate}"
+            RootFolderTemplate="{StaticResource RootFolderTemplate}" />
+    </Page.Resources>
+
+
+    <Grid>
+        <ContentDialog
+            x:Name="DuplicateModDialog"
+            Title="已存在同名文件夹"
+            CloseButtonText="取消"
+            DefaultButton="Primary"
+            IsPrimaryButtonEnabled="{x:Bind ViewModel.CanExecuteDialogCommand, Mode=OneWay}"
+            PrimaryButtonCommand="{x:Bind ViewModel.AddModDialogCommand, Mode=OneWay}"
+            PrimaryButtonText="{x:Bind ViewModel.PrimaryButtonText, Mode=OneWay}">
+            <ContentDialog.Content>
+                <Grid MinWidth="500">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <InfoBar
+                        IsClosable="False"
+                        IsOpen="True"
+                        Message="1. 你可以选择覆盖旧模组（会删除旧模组）。&#x0a;或&#x0a;2. 你也可以重命名新模组或旧模组"
+                        Severity="Warning" />
+
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+
+
+                        <StackPanel Margin="4">
+                            <TextBlock Text="新模组：" />
+                            <TextBox
+                                Margin="4"
+                                Header="自定义名称"
+                                IsEnabled="{x:Bind ViewModel.OverwriteExistingMod, Mode=OneWay, Converter={StaticResource BoolNegationConverter}}"
+                                PlaceholderText="自定义名称"
+                                Text="{x:Bind ViewModel.CustomName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                            <TextBox
+                                Margin="4"
+                                Header="文件夹名称"
+                                IsEnabled="{x:Bind ViewModel.OverwriteExistingMod, Mode=OneWay, Converter={StaticResource BoolNegationConverter}}"
+                                PlaceholderText="文件夹名称"
+                                Text="{x:Bind ViewModel.ModFolderName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="1" Margin="4">
+                            <TextBlock Text="现有模组：" />
+                            <TextBox
+                                Margin="4"
+                                Header="自定义名称"
+                                IsEnabled="{x:Bind ViewModel.OverwriteExistingMod, Mode=OneWay, Converter={StaticResource BoolNegationConverter}}"
+                                PlaceholderText="自定义名称"
+                                Text="{x:Bind ViewModel.DuplicateModCustomName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                            <TextBox
+                                Margin="4"
+                                Header="文件夹名称"
+                                IsEnabled="{x:Bind ViewModel.OverwriteExistingMod, Mode=OneWay, Converter={StaticResource BoolNegationConverter}}"
+                                PlaceholderText="文件夹名称"
+                                Text="{x:Bind ViewModel.DuplicateModFolderName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                            <controls:LinkButton Link="{x:Bind ViewModel.DuplicateModPath, Mode=OneWay}" Text="打开已有模组文件夹..." />
+                        </StackPanel>
+
+                    </Grid>
+
+                    <StackPanel Grid.Row="2">
+                        <CheckBox
+                            Margin="4"
+                            Content="覆盖已有模组"
+                            IsChecked="{x:Bind ViewModel.OverwriteExistingMod, Mode=TwoWay}" />
+
+                        <CheckBox
+                            Margin="4"
+                            Command="{x:Bind ViewModel.ToggleReplaceDuplicateModInPresetCommand}"
+                            IsChecked="{x:Bind ViewModel.ReplaceDuplicateModInPreset, Mode=OneWay}"
+                            ToolTipService.ToolTip="在预设中将重复模组替换为新安装的模组。该选项与“在预设中替换旧模组”的选项互斥。">
+                            <TextBlock TextWrapping="WrapWholeWords" Text="在预设中用新模组替换重复模组" />
+                        </CheckBox>
+                    </StackPanel>
+
+                </Grid>
+
+            </ContentDialog.Content>
+        </ContentDialog>
+
+
+        <Grid x:Name="ModInstallRoot" Padding="8">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+
+            <!--<ScrollViewer Margin="0,0,4,0">-->
+
+            <!--<StackPanel MinWidth="350">-->
+
+            <Grid Height="{x:Bind ModViewColumn.Height, Mode=OneWay}">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <ToggleButton
+                    VerticalAlignment="Top"
+                    Command="{x:Bind ViewModel.ToggleAlwaysOnTopCommand}"
+                    IsChecked="{x:Bind ViewModel.AlwaysOnTop, Mode=TwoWay}"
+                    ToolTipService.ToolTip="窗口置顶">
+                    <FontIcon Glyph="&#xE718;" />
+                </ToggleButton>
+                <controls:CustomImage
+                    MinWidth="350"
+                    MaxHeight="800"
+                    ClearButtonCommand="{x:Bind ViewModel.ClearModPreviewImageCommand}"
+                    CopyButtonCommand="{x:Bind ViewModel.CopyImageCommand}"
+                    EditButtonCommand="{x:Bind ViewModel.PickImageCommand}"
+                    ImageUri="{x:Bind ViewModel.ModPreviewImagePath, Mode=OneWay}"
+                    IsContextMenuEnabled="True"
+                    PasteButtonCommand="{x:Bind ViewModel.PasteModImageCommand}" />
+
+                <Button
+                    Margin="0,0,0,4"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Bottom"
+                    Command="{x:Bind ViewModel.ReRetrieveModInfoCommand}"
+                    ToolTipService.ToolTip="从模组页面获取模组信息">
+                    <Button.Content>
+                        <FontIcon Glyph="&#xE72C;" />
+                    </Button.Content>
+                </Button>
+
+                <ProgressRing
+                    Margin="0,0,0,4"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Bottom"
+                    IsActive="{x:Bind ViewModel.IsRetrievingModInfo, Mode=OneWay}" />
+
+                <TextBox
+                    Grid.Row="1"
+                    Header="模组页面链接"
+                    IsReadOnly="{x:Bind ViewModel.IsRetrievingModInfo, Mode=OneWay}"
+                    KeyDown="UrlTextBox_KeyDown"
+                    PlaceholderText="粘贴 URL 自动填充（仅 GameBanana）"
+                    Text="{x:Bind ViewModel.ModUrl, Mode=TwoWay}" />
+                <TextBox
+                    Grid.Row="2"
+                    Header="模组名称"
+                    IsReadOnly="{x:Bind ViewModel.IsRetrievingModInfo, Mode=OneWay}"
+                    PlaceholderText="在应用中显示的名称"
+                    Text="{x:Bind ViewModel.CustomName, Mode=TwoWay}" />
+                <TextBox
+                    Grid.Row="3"
+                    Header="作者"
+                    IsReadOnly="{x:Bind ViewModel.IsRetrievingModInfo, Mode=OneWay}"
+                    Text="{x:Bind ViewModel.Author, Mode=TwoWay}" />
+                <TextBox
+                    Grid.Row="4"
+                    Margin="0,0,0,8"
+                    AcceptsReturn="False"
+                    Header="备注"
+                    PlaceholderText="自定义备注，将显示在角色详情页表格中"
+                    Text="{x:Bind ViewModel.Description, Mode=TwoWay}" />
+            </Grid>
+
+            <!--</StackPanel>-->
+            <!--</ScrollViewer>-->
+
+
+            <!--
+                Folder overview
+                Select Root Mod Folder
+                Select ShaderFixes
+                Select Image
+            -->
+            <Grid
+                x:Name="ModViewColumn"
+                Grid.Column="1"
+                MinWidth="500">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <TreeView
+                    x:Name="ModFolderTree"
+                    CanDragItems="False"
+                    CanReorderItems="False"
+                    ItemTemplateSelector="{StaticResource ExplorerItemTemplateSelector}"
+                    ItemsSource="{x:Bind ViewModel.RootFolder, Mode=OneWay}" />
+                <!--  MinHeight="220"  -->
+
+                <StackPanel
+                    x:Name="ModFolderSelectionDetails"
+                    Grid.Row="1"
+                    Width="{x:Bind ModViewColumn.Width, Mode=OneWay}"
+                    VerticalAlignment="Top">
+
+                    <StackPanel Margin="0,8,0,12" Orientation="Horizontal">
+                        <FontIcon Margin="4,0" Glyph="{x:Bind ViewModel.RootFolderIcon}" />
+                        <TextBlock Margin="4,0" Text="模组文件夹：" />
+                        <TextBlock Text="{x:Bind ViewModel.LastSelectedRootFolder.Name, Mode=OneWay, FallbackValue=未知}" />
+                        <FontIcon Margin="4,0" Glyph="&#xEA62;" />
+                        <TextBlock Text="{x:Bind ViewModel.ModCharacterName, Mode=OneWay}" />
+                    </StackPanel>
+
+
+
+
+                    <StackPanel Orientation="Horizontal">
+                        <FontIcon Margin="4,0" Glyph="{x:Bind ViewModel.SelectedImageIcon}" />
+                        <TextBlock Margin="4,0" Text="预览图来源：" />
+                        <TextBlock Text="{x:Bind ViewModel.ImageSource, Mode=OneWay}" />
+                    </StackPanel>
+                    <StackPanel
+                        Margin="0,0,0,8"
+                        Orientation="Horizontal"
+                        Visibility="Collapsed">
+                        <CheckBox
+                            Content="自动"
+                            IsChecked="True"
+                            IsEnabled="False" />
+                        <CheckBox Content="链接" IsEnabled="False" />
+                        <CheckBox Content="模组文件" IsEnabled="False" />
+                        <CheckBox Content="忽略" IsEnabled="False" />
+                    </StackPanel>
+
+                    <TextBlock
+                        Padding="8"
+                        HorizontalAlignment="Left"
+                        TextWrapping="WrapWholeWords"
+                        Text="在此选择模组文件夹的根目录。" />
+
+                    <TextBlock
+                        Padding="8"
+                        HorizontalAlignment="Left"
+                        TextWrapping="WrapWholeWords"
+                        Text="通常这里是包含“merged.ini/Script.ini”或“.UMManager_ModConfig.json”（旧版本可能为“.JASM_ModConfig.json”）的文件夹。&#x0a;UMManager 会自动检测模组目录与 merged.ini 文件。如果你希望手动选择模组文件夹，可以在上方概览中右键文件夹进行选择。" />
+
+                    <TextBlock
+                        Padding="8"
+                        HorizontalAlignment="Left"
+                        TextWrapping="WrapWholeWords"
+                        Text="你也可以手动选择模组预览图文件。通常直接点击“添加模组”即可。" />
+
+
+
+                    <StackPanel Visibility="Collapsed">
+
+                        <StackPanel Orientation="Horizontal">
+                            <FontIcon Margin="4,0" Glyph="{x:Bind ViewModel.SelectedMergeIniIcon}" />
+                            <TextBlock Margin="4,0" Text="MergedIniFile 文件夹：" />
+                            <TextBlock Text="自动" />
+                        </StackPanel>
+
+                        <StackPanel Margin="0,0,0,8" Orientation="Horizontal">
+                            <CheckBox
+                                Content="自动"
+                                IsChecked="True"
+                                IsEnabled="False" />
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal">
+                            <FontIcon Margin="4,0" Glyph="{x:Bind ViewModel.ShaderFixesFolderIcon}" />
+                            <TextBlock Margin="4,0" Text="ShaderFixes 文件夹：" />
+                            <TextBlock Text="{x:Bind ViewModel.LastSelectedShaderFixesFolder.Name, Mode=OneWay, FallbackValue=未知}" />
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal">
+                            <CheckBox Content="自动" IsEnabled="False" />
+                            <CheckBox
+                                Content="手动选择"
+                                IsChecked="True"
+                                IsEnabled="False" />
+                            <CheckBox Content="忽略" IsEnabled="False" />
+                        </StackPanel>
+
+                    </StackPanel>
+
+                </StackPanel>
+
+
+
+                <Grid Grid.Row="2" HorizontalAlignment="Stretch">
+
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+
+                    <CheckBox
+                        Margin="4,0"
+                        Command="{x:Bind ViewModel.EnableOnlyToggleCommand}"
+                        Content="启用此模组并禁用其他？"
+                        IsChecked="{x:Bind ViewModel.EnableThisMod, Mode=OneWay}"
+                        ToolTipService.ToolTip="启用此模组并禁用其他模组。若该模组属于某个角色皮肤，则只会影响该角色的皮肤模组。" />
+
+
+                    <CheckBox
+                        Grid.Column="1"
+                        Command="{x:Bind ViewModel.ToggleReplaceModToUpdateInPresetCommand}"
+                        Content="在预设中用新模组替换旧模组"
+                        IsChecked="{x:Bind ViewModel.ReplaceModToUpdateInPreset, Mode=OneWay}"
+                        ToolTipService.ToolTip="在所有预设中把要更新的旧模组替换为新安装的模组。该选项与检测到重复模组时的选项互相独立。"
+                        Visibility="{x:Bind ViewModel.IsUpdatingMod, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}" />
+
+                    <Button
+                        Grid.Column="2"
+                        Margin="4,0"
+                        HorizontalAlignment="Right"
+                        Command="{x:Bind ViewModel.AddModCommand}"
+                        Content="添加模组">
+                        <Button.KeyboardAccelerators>
+                            <KeyboardAccelerator Key="S" Modifiers="Control" />
+                        </Button.KeyboardAccelerators>
+                    </Button>
+
+                </Grid>
+
+
+
+            </Grid>
+
+
+        </Grid>
+
+
+    </Grid>
+
+</Page>

@@ -1,0 +1,994 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AppDisplayName" xml:space="preserve">
+    <value>UMManager - 皮肤模组管理器</value>
+  </data>
+  <data name="AppDescription" xml:space="preserve">
+    <value>UMManager - 皮肤模组管理器</value>
+  </data>
+  <data name="Startup1.Text" xml:space="preserve">
+    <value>作为首次设置的一部分，您需要选择 3Dmigoto（或同类 Mod Loader）的根目录及其关联的模组文件夹。该目录通常包含 3DMigoto Loader.exe（或同类启动器）以及一个模组文件夹。如果您尚未完成设置，请参见下面的链接。我发现大多数模组在 GameBanana 上，但 NexusMods 也有一些。</value>
+  </data>
+  <data name="Startup2.Text" xml:space="preserve">
+    <value>保存设置后，应用程序将在模组文件夹内为每个角色创建一个模组文件夹。该应用程序通过在模组文件夹前缀中添加“DISABLED_”来启用和禁用模组。UMManager 还支持导出由其管理的模组，如果您希望将其与其他应用程序一起使用。目前，只有这个页面和部分设置页面已经翻译完成。翻译是通过 ChatGPT 进行的，可能包含错误。</value>
+  </data>
+  <data name="Startup3.Text" xml:space="preserve">
+    <value>在使用与您的文件交互的应用程序之前，备份您的文件/模组总是一个好主意。</value>
+  </data>
+  <data name="Startup/Tooltip1.Text" xml:space="preserve">
+    <value>启用此选项将提示应用程序将现有的模组按其各自角色分配的文件夹进行排序。任何无法合理匹配的模组将放入“其他”文件夹。</value>
+  </data>
+  <data name="Startup/Tooltip2.Text" xml:space="preserve">
+    <value>一个包含多个角色名称的模组文件夹可能会错误地移到一个角色的目录中。</value>
+  </data>
+  <data name="Startup/Tooltip3.Text" xml:space="preserve">
+    <value>这可以在设置页面中稍后激活。</value>
+  </data>
+  <data name="Startup_Title.Text" xml:space="preserve">
+    <value>首次启动</value>
+    <comment>启动页面的页面标题</comment>
+  </data>
+  <data name="Settings_About.Text" xml:space="preserve">
+    <value>关于此应用程序</value>
+  </data>
+  <data name="Settings_AboutDescription.Text" xml:space="preserve">
+    <value>UMManager 的目标是使组织大量皮肤模组变得更容易</value>
+  </data>
+  <data name="Settings_ComboBox_Header.Text" xml:space="preserve">
+    <value>选择显示语言：</value>
+  </data>
+  <data name="Settings_Language_TexBlock.Text" xml:space="preserve">
+    <value>语言选项目前有限。这是一个正在进行中的工作。这是由ChatGPT翻译的。</value>
+  </data>
+  <data name="Settings_Personalization.Text" xml:space="preserve">
+    <value>个性化</value>
+  </data>
+  <data name="Settings_Theme.Text" xml:space="preserve">
+    <value>主题</value>
+  </data>
+  <data name="Settings_Theme_Dark.Content" xml:space="preserve">
+    <value>深色</value>
+  </data>
+  <data name="Settings_Theme_Default.Content" xml:space="preserve">
+    <value>默认</value>
+  </data>
+  <data name="Settings_Theme_Light.Content" xml:space="preserve">
+    <value>浅色</value>
+  </data>
+  <data name="Settings_Title.Text" xml:space="preserve">
+    <value>设置</value>
+    <comment>设置页面的页面标题</comment>
+  </data>
+  <data name="Settings_ExportDialog.Text" xml:space="preserve">
+    <value>这将导出 UMManager 管理的所有模组到您选择的导出文件夹。模组将被复制到导出文件夹，而不会从原始文件夹中删除。</value>
+  </data>
+  <data name="Settings_ExportDialogButtons.CloseButtonText" xml:space="preserve">
+    <value>取消</value>
+  </data>
+  <data name="Settings_ExportDialogButtons.PrimaryButtonText" xml:space="preserve">
+    <value>导出</value>
+  </data>
+  <data name="Settings_ExportDialog_ChangeStatus.Text" xml:space="preserve">
+    <value>更改导出的模组状态</value>
+  </data>
+  <data name="Settings_ExportDialog_KeepStructure.Text" xml:space="preserve">
+    <value>在导出文件夹中保留CharacterName/Mods的文件夹结构</value>
+  </data>
+  <data name="Settings_ExportDialog_RemoveJasm.Text" xml:space="preserve">
+    <value>从导出的模组中移除 UMManager 配置文件</value>
+  </data>
+  <data name="Settings_Export_Button.Text" xml:space="preserve">
+    <value>导出模组</value>
+  </data>
+  <data name="Settings_Export_Title.Text" xml:space="preserve">
+    <value>导出/备份模组</value>
+  </data>
+  <data name="Settings_Language.Text" xml:space="preserve">
+    <value>语言</value>
+  </data>
+  <data name="Stopped" xml:space="preserve">
+    <value>停止</value>
+  </data>
+  <data name="Waiting" xml:space="preserve">
+    <value>等待</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>错误</value>
+  </data>
+  <data name="Running" xml:space="preserve">
+    <value>运行中</value>
+  </data>
+  <data name="Common.Button.Cancel" xml:space="preserve">
+    <value>取消</value>
+  </data>
+  <data name="Common.Button.Close" xml:space="preserve">
+    <value>关闭</value>
+  </data>
+  <data name="Common.Button.Delete" xml:space="preserve">
+    <value>删除</value>
+  </data>
+  <data name="Common.Button.Disable" xml:space="preserve">
+    <value>禁用</value>
+  </data>
+  <data name="Common.Button.Enable" xml:space="preserve">
+    <value>启用</value>
+  </data>
+  <data name="Common.Button.Exit" xml:space="preserve">
+    <value>退出</value>
+  </data>
+  <data name="Common.Button.Export" xml:space="preserve">
+    <value>导出</value>
+  </data>
+  <data name="Common.Button.No" xml:space="preserve">
+    <value>否</value>
+  </data>
+  <data name="Common.Button.Restart" xml:space="preserve">
+    <value>重启</value>
+  </data>
+  <data name="Common.Button.Start" xml:space="preserve">
+    <value>启动</value>
+  </data>
+  <data name="Common.Button.Understand" xml:space="preserve">
+    <value>我已了解</value>
+  </data>
+  <data name="Common.Button.Yes" xml:space="preserve">
+    <value>是</value>
+  </data>
+  <data name="Common.CheckBox.DoNotAskAgain" xml:space="preserve">
+    <value>不再询问</value>
+  </data>
+  <data name="Common.CheckBox.DoNotShowAgain" xml:space="preserve">
+    <value>不再提示</value>
+  </data>
+  <data name="Dialog.DeleteMods.Title" xml:space="preserve">
+    <value>确定删除这 {0} 个模组？</value>
+  </data>
+  <data name="Dialog.DeleteMods.MoveToRecycleBin" xml:space="preserve">
+    <value>移到回收站？</value>
+  </data>
+  <data name="Dialog.DeleteMods.RemoveFromPresets" xml:space="preserve">
+    <value>从预设中移除？</value>
+  </data>
+  <data name="Notification.ModsDeleted.Title" xml:space="preserve">
+    <value>已删除 {0} 个模组</value>
+  </data>
+  <data name="Notification.ModsDeleted.Message" xml:space="preserve">
+    <value>已在 {1} 的 Mods 文件夹中成功删除：{0}</value>
+  </data>
+  <data name="Notification.DeleteModsError.Title" xml:space="preserve">
+    <value>删除模组失败</value>
+  </data>
+  <data name="Notification.DeleteModsError.Header" xml:space="preserve">
+    <value>删除模组出错：</value>
+  </data>
+  <data name="Notification.DeleteModsError.PresetHeader" xml:space="preserve">
+    <value>预设处理出错的模组：</value>
+  </data>
+  <data name="Notification.DeleteModsError.DeleteHeader" xml:space="preserve">
+    <value>删除出错的模组：</value>
+  </data>
+  <data name="Dialog.ClearEmptyFolders.Title" xml:space="preserve">
+    <value>清理空文件夹</value>
+  </data>
+  <data name="Dialog.ClearEmptyFolders.Text" xml:space="preserve">
+    <value>将删除角色 modList 中的所有空文件夹（空文件夹或仅包含 .UMManager_ 文件/文件夹的目录）。
+如果角色文件夹为空，也会一并删除。
+Mods 根目录下的空文件夹也会被删除</value>
+  </data>
+  <data name="Notification.EmptyFoldersDeleted.Title" xml:space="preserve">
+    <value>空文件夹已删除</value>
+  </data>
+  <data name="Notification.EmptyFoldersDeleted.Header" xml:space="preserve">
+    <value>已删除文件夹：</value>
+  </data>
+  <data name="Notification.NoCategoriesSelected.Title" xml:space="preserve">
+    <value>未选择分类</value>
+  </data>
+  <data name="Notification.NoCategoriesSelected.DisableMessage" xml:space="preserve">
+    <value>未选择任何要禁用模组的分类。</value>
+  </data>
+  <data name="Notification.NoCategoriesSelected.RandomizeMessage" xml:space="preserve">
+    <value>未选择任何要随机的分类。</value>
+  </data>
+  <data name="Dialog.DisableMods.Title" xml:space="preserve">
+    <value>禁用模组</value>
+  </data>
+  <data name="Dialog.DisableMods.Primary" xml:space="preserve">
+    <value>禁用所选分类中的模组</value>
+  </data>
+  <data name="Dialog.DisableMods.SelectCategories" xml:space="preserve">
+    <value>选择要禁用模组的分类：</value>
+  </data>
+  <data name="Dialog.DisableMods.SuggestPreset" xml:space="preserve">
+    <value>如果启用的模组很多，建议先创建预设（或备份）再执行禁用。
+
+仅会禁用所选分类中由 UMManager 跟踪的模组。</value>
+  </data>
+  <data name="Notification.ModsDisabled.Title" xml:space="preserve">
+    <value>模组已禁用</value>
+  </data>
+  <data name="Notification.ModsDisabled.Message" xml:space="preserve">
+    <value>已禁用所选分类中所有由 UMManager 跟踪的模组：{0}</value>
+  </data>
+  <data name="Notification.DisableModsErrors.Title" xml:space="preserve">
+    <value>禁用模组时发生错误</value>
+  </data>
+  <data name="Notification.DisableModsErrors.Header" xml:space="preserve">
+    <value>以下模组发生错误：</value>
+  </data>
+  <data name="Dialog.RandomizeMods.Title" xml:space="preserve">
+    <value>随机启用模组</value>
+  </data>
+  <data name="Dialog.RandomizeMods.Primary" xml:space="preserve">
+    <value>随机</value>
+  </data>
+  <data name="Dialog.RandomizeMods.SelectCategories" xml:space="preserve">
+    <value>选择要随机的分类：</value>
+  </data>
+  <data name="Dialog.RandomizeMods.Note" xml:space="preserve">
+    <value>注意：仅会对“预期同时只启用一个模组”的文件夹进行随机；“Others __”文件夹不会随机。对于有多个游戏内皮肤的角色，将在每个皮肤下最多启用一个模组。</value>
+  </data>
+  <data name="Dialog.RandomizeMods.AllowNone" xml:space="preserve">
+    <value>允许结果为空（某个模组文件夹可能最终不启用任何模组）</value>
+  </data>
+  <data name="Dialog.RandomizeMods.SuggestPreset" xml:space="preserve">
+    <value>如果启用的模组很多，建议先创建预设（或备份）再随机。</value>
+  </data>
+  <data name="Notification.RandomizeFailed.Title" xml:space="preserve">
+    <value>随机模组失败</value>
+  </data>
+  <data name="Notification.ModsRandomized.Title" xml:space="preserve">
+    <value>模组已随机</value>
+  </data>
+  <data name="Notification.ModsRandomized.Message" xml:space="preserve">
+    <value>已对以下分类随机：{0}</value>
+  </data>
+  <data name="Dialog.FriendlyWarning.Title" xml:space="preserve">
+    <value>友情提示</value>
+  </data>
+  <data name="Dialog.FriendlyWarning.Text" xml:space="preserve">
+    <value>创建命令时请谨慎：命令可运行系统上的任意可执行文件。仅从可信来源创建命令。UMManager 并不完美，无法防范恶意脚本或 UMManager 的缺陷/漏洞。
+
+点击“我已了解”即表示你已理解风险。</value>
+  </data>
+  <data name="Dialog.DeleteMod.Title" xml:space="preserve">
+    <value>删除模组</value>
+  </data>
+  <data name="Dialog.DeleteMod.Text" xml:space="preserve">
+    <value>确定要删除 {0} 吗？</value>
+  </data>
+  <data name="Notification.DeleteModFailed.Title" xml:space="preserve">
+    <value>删除模组失败</value>
+  </data>
+  <data name="Notification.ModDeleted.Title" xml:space="preserve">
+    <value>模组已删除</value>
+  </data>
+  <data name="Notification.ModDeleted.Message" xml:space="preserve">
+    <value>已删除 {0}</value>
+  </data>
+  <data name="Notification.PasteImageFailed.Title" xml:space="preserve">
+    <value>粘贴图片失败</value>
+  </data>
+  <data name="Notification.PasteImageFailed.NoImage" xml:space="preserve">
+    <value>剪贴板中没有图片</value>
+  </data>
+  <data name="Dialog.DisableCharacter.Title" xml:space="preserve">
+    <value>禁用角色</value>
+  </data>
+  <data name="Dialog.DisableCharacter.Text" xml:space="preserve">
+    <value>确定要禁用该角色吗？这不会删除角色，但 UMManager 将不再识别该角色，之后可重新启用。点击“是”将立即执行。</value>
+  </data>
+  <data name="Dialog.DisableCharacter.DeleteFolder" xml:space="preserve">
+    <value>删除角色文件夹及其内容/模组？
+文件将被永久删除！</value>
+  </data>
+  <data name="Dialog.DisableCharacter.Primary" xml:space="preserve">
+    <value>是，禁用该角色</value>
+  </data>
+  <data name="Dialog.DeleteCharacter.Title" xml:space="preserve">
+    <value>删除角色</value>
+  </data>
+  <data name="Dialog.DeleteCharacter.Text" xml:space="preserve">
+    <value>确定要删除该自定义角色吗？这会移除角色，且 UMManager 将不再识别该角色。点击“是”将立即执行。</value>
+  </data>
+  <data name="Dialog.DeleteCharacter.DeleteFolder" xml:space="preserve">
+    <value>删除自定义角色文件夹及其内容/模组？
+文件将被永久删除！</value>
+  </data>
+  <data name="Dialog.DeleteCharacter.Primary" xml:space="preserve">
+    <value>是，删除该角色</value>
+  </data>
+  <data name="Dialog.EnableCharacter.Title" xml:space="preserve">
+    <value>启用角色</value>
+  </data>
+  <data name="Dialog.EnableCharacter.Text" xml:space="preserve">
+    <value>确定要启用该角色吗？点击“是”将立即执行。</value>
+  </data>
+  <data name="Dialog.EnableCharacter.Primary" xml:space="preserve">
+    <value>是，启用该角色</value>
+  </data>
+  <data name="Notification.CharacterDeleted.Title" xml:space="preserve">
+    <value>角色已删除</value>
+  </data>
+  <data name="Notification.CharacterDeleted.Message" xml:space="preserve">
+    <value>角色“{0}”已成功删除</value>
+  </data>
+  <data name="Notification.SaveCharacterFailed.Title" xml:space="preserve">
+    <value>保存角色更改失败</value>
+  </data>
+  <data name="Notification.CreateCharacterFailed.Title" xml:space="preserve">
+    <value>创建角色失败</value>
+  </data>
+  <data name="Notification.CreateCharacterEnableModListFailed.Title" xml:space="preserve">
+    <value>角色已创建，但启用该角色的模组列表失败</value>
+  </data>
+  <data name="Notification.CharacterCreated.Title" xml:space="preserve">
+    <value>角色已创建</value>
+  </data>
+  <data name="Notification.CharacterCreated.Message" xml:space="preserve">
+    <value>角色“{0}”已成功创建</value>
+  </data>
+  <data name="Dialog.CharacterJsonExport.Title" xml:space="preserve">
+    <value>角色模型 JSON 导出</value>
+  </data>
+  <data name="Dialog.CharacterJsonExport.Primary" xml:space="preserve">
+    <value>复制到剪贴板并关闭</value>
+  </data>
+  <data name="Notification.CreateJsonExportFailed.Title" xml:space="preserve">
+    <value>生成 JSON 导出失败</value>
+  </data>
+  <data name="Notification.CharacterJsonCopied.Title" xml:space="preserve">
+    <value>角色 JSON 已复制到剪贴板</value>
+  </data>
+  <data name="Notification.Restarting.Title" xml:space="preserve">
+    <value>正在重启…</value>
+  </data>
+  <data name="Notification.Restarting.Message" xml:space="preserve">
+    <value>应用即将重启。</value>
+  </data>
+  <data name="Dialog.ReorganizeMods.Title" xml:space="preserve">
+    <value>整理 Mods？</value>
+  </data>
+  <data name="Dialog.ReorganizeMods.Text" xml:space="preserve">
+    <value>是否要整理 Mods 文件夹？应用会把直接位于 Mods 与 Others 文件夹下的模组，按角色归类移动到对应文件夹。无法匹配的会放入 “Others”。已在 “Others” 中的模组将保持不变。</value>
+  </data>
+  <data name="Notification.ModsReorganizationFailed.Title" xml:space="preserve">
+    <value>整理 Mods 失败。</value>
+  </data>
+  <data name="Notification.SeeLogs.Message" xml:space="preserve">
+    <value>详情请查看日志。</value>
+  </data>
+  <data name="Notification.ModsReorganized.Title" xml:space="preserve">
+    <value>Mods 已整理。</value>
+  </data>
+  <data name="Notification.MovedModsToCharacterFolders.Message" xml:space="preserve">
+    <value>已移动 {0} 个模组到角色文件夹。</value>
+  </data>
+  <data name="Dialog.ExportMods.Title" xml:space="preserve">
+    <value>导出 Mods</value>
+  </data>
+  <data name="Notification.ModsExported.Title" xml:space="preserve">
+    <value>Mods 已导出</value>
+  </data>
+  <data name="Notification.ModsExported.Message" xml:space="preserve">
+    <value>Mods 已导出到 {0}</value>
+  </data>
+  <data name="Notification.ErrorExportingMods.Title" xml:space="preserve">
+    <value>导出 Mods 出错</value>
+  </data>
+  <data name="Dialog.ChangeLanguage.Title" xml:space="preserve">
+    <value>需要重启</value>
+  </data>
+  <data name="Dialog.ChangeLanguage.Primary" xml:space="preserve">
+    <value>更改语言并重启</value>
+  </data>
+  <data name="Dialog.SwitchGame.Title" xml:space="preserve">
+    <value>切换游戏</value>
+  </data>
+  <data name="Dialog.SwitchGame.Text" xml:space="preserve">
+    <value>切换游戏将重启应用。
+这用于确保为所选游戏正确加载配置。
+
+是否继续切换游戏？</value>
+  </data>
+  <data name="Dialog.SwitchGame.Primary" xml:space="preserve">
+    <value>切换到 {0}</value>
+  </data>
+  <data name="Notification.ErrorStartingUpdateProcess.Title" xml:space="preserve">
+    <value>启动更新流程出错</value>
+  </data>
+  <data name="Notification.CouldNotStartUpdateProcess.Title" xml:space="preserve">
+    <value>无法启动更新流程</value>
+  </data>
+  <data name="Notification.LogFileNotFound.Title" xml:space="preserve">
+    <value>未找到日志文件</value>
+  </data>
+  <data name="Notification.LogFileCouldNotBeOpened.Title" xml:space="preserve">
+    <value>无法打开日志文件</value>
+  </data>
+  <data name="Notification.ElevatorNotRunning.Title" xml:space="preserve">
+    <value>Elevator 未运行</value>
+  </data>
+  <data name="Notification.ElevatorNotRunning.Message" xml:space="preserve">
+    <value>请先在“设置”页面启动 Elevator</value>
+  </data>
+  <data name="Dialog.PresetsHowWork.Title" xml:space="preserve">
+    <value>预设如何工作</value>
+  </data>
+  <data name="Dialog.PresetsHowWork.Text" xml:space="preserve">
+    <value>预设是要启用的模组列表及其偏好设置（例如 .UMManager_ModConfig.json）。
+
+创建预设时，会保存当前启用的模组及其偏好设置。
+
+可通过启动 Elevator 并启用 Auto Sync 让 UMManager 处理 3Dmigoto 重载，从而在游戏内自动刷新已启用模组。
+
+也可以不使用预设，只用手动控件来持久化偏好设置。</value>
+  </data>
+  <data name="Dialog.AdminWarning.Title" xml:space="preserve">
+    <value>管理员身份运行警告</value>
+  </data>
+  <data name="Dialog.AdminWarning.Text" xml:space="preserve">
+    <value>你正在以管理员身份运行 UMManager，不建议这样做。
+
+以管理员身份运行时，程序对系统拥有完全访问权限，若发生问题可能造成损害。
+
+建议退出并以非管理员身份重新启动。</value>
+  </data>
+  <data name="Dialog.NewFolderStructure.Title" xml:space="preserve">
+    <value>新的文件夹结构</value>
+  </data>
+  <data name="Dialog.NewFolderStructure.Primary" xml:space="preserve">
+    <value>帮我整理模组</value>
+  </data>
+  <data name="Dialog.NewFolderStructure.Secondary" xml:space="preserve">
+    <value>我自己处理</value>
+  </data>
+  <data name="Dialog.CharacterSkins.EnableTitle" xml:space="preserve">
+    <value>将角色皮肤视为独立角色？（启用）</value>
+  </data>
+  <data name="Dialog.CharacterSkins.EnableText" xml:space="preserve">
+    <value>启用后，UMManager 会把游戏内皮肤在“角色总览”中作为独立角色展示。
+该选项未来可能成为默认设置。
+UMManager 不会移动或删除你的任何模组。
+
+确定要启用吗？启用后 UMManager 将重启……</value>
+  </data>
+  <data name="Dialog.CharacterSkins.DisableTitle" xml:space="preserve">
+    <value>将角色皮肤视为独立角色？（禁用）</value>
+  </data>
+  <data name="Dialog.CharacterSkins.DisableText" xml:space="preserve">
+    <value>禁用后，UMManager 会把游戏内皮肤在“角色总览”中作为基础角色的皮肤展示。
+这目前是 UMManager 的默认行为。
+UMManager 不会移动或删除你的任何模组。
+
+确定要禁用吗？禁用后 UMManager 将重启……</value>
+  </data>
+  <data name="Dialog.ThemeRestartRequired.Title" xml:space="preserve">
+    <value>需要重启</value>
+  </data>
+  <data name="Dialog.ThemeRestartRequired.Text" xml:space="preserve">
+    <value>需要重启应用以使主题生效，否则应用可能不稳定（可能是主题配置不完善导致）。建议使用深色模式。
+
+给你带来不便，敬请谅解。</value>
+  </data>
+  <data name="Notification.ProcessKillFailed.Title" xml:space="preserve">
+    <value>结束进程失败</value>
+  </data>
+  <data name="Notification.ProcessNotRunning.Title" xml:space="preserve">
+    <value>进程未运行</value>
+  </data>
+  <data name="Notification.ProcessKilledSuccessfully.Title" xml:space="preserve">
+    <value>进程已结束</value>
+  </data>
+  <data name="Notification.GetCommandFailed.Title" xml:space="preserve">
+    <value>获取命令失败</value>
+  </data>
+  <data name="Notification.CommandNotFound.Message" xml:space="preserve">
+    <value>未找到命令</value>
+  </data>
+  <data name="Notification.DeleteCommandFailed.Title" xml:space="preserve">
+    <value>删除命令失败</value>
+  </data>
+  <data name="Notification.CommandDeletedSuccessfully.Title" xml:space="preserve">
+    <value>命令“{0}”已删除</value>
+  </data>
+  <data name="Common.Button.Create" xml:space="preserve">
+    <value>创建</value>
+  </data>
+  <data name="Common.Button.GotIt" xml:space="preserve">
+    <value>知道了</value>
+  </data>
+  <data name="Common.Button.Save" xml:space="preserve">
+    <value>保存</value>
+  </data>
+  <data name="Dialog.UpdateModsFolder.Title" xml:space="preserve">
+    <value>更新文件夹路径？</value>
+  </data>
+  <data name="Dialog.UpdateModsFolder.Text" xml:space="preserve">
+    <value>确定要保存新的 Mods 文件夹路径吗？保存后应用将自动重启。</value>
+  </data>
+  <data name="Dialog.StartElevator.Title" xml:space="preserve">
+    <value>启动 Elevator 进程？</value>
+  </data>
+  <data name="Dialog.StartElevator.Text" xml:space="preserve">
+    <value>点击“启动”以启动 Elevator。Elevator 是一个提升权限（管理员）的进程，用于与原神游戏进程通信。
+
+当 Elevator 运行时，你可以在本应用内按 F10 刷新原神中的已启用模组。
+
+启用和禁用模组也会自动刷新原神中的已启用模组。
+本程序关闭时，Elevator 进程应会自动退出。
+
+点击“启动”后，会弹出用户帐户控制（UAC）提示以确认提权。
+
+（按 F10 需要原神与 3DMigoto 正在运行。）
+
+如需单独下载请查看 GitHub 的 FAQ；它可能会被误报为恶意软件。</value>
+  </data>
+  <data name="Dialog.ChangeLanguage.Text" xml:space="preserve">
+    <value>更改语言需要重启应用。
+这是为了确保应用能按所选语言正确加载配置。
+
+是否要更改语言？</value>
+  </data>
+  <data name="Dialog.CharacterModel.Title" xml:space="preserve">
+    <value>角色模型</value>
+  </data>
+  <data name="Dialog.DeleteSkin.Title" xml:space="preserve">
+    <value>删除皮肤</value>
+  </data>
+  <data name="Dialog.DeleteSkin.Text" xml:space="preserve">
+    <value>确定删除皮肤“{0}”吗？</value>
+  </data>
+  <data name="Notification.ElevatorStartFailed.Title" xml:space="preserve">
+    <value>无法启动 Elevator</value>
+  </data>
+  <data name="Notification.GenericError.Title" xml:space="preserve">
+    <value>发生错误</value>
+  </data>
+  <data name="Notification.ModSettings.SaveFailed.Title" xml:space="preserve">
+    <value>保存模组设置失败：{0}</value>
+  </data>
+  <data name="Notification.ModSettings.SaveFailed.Message" xml:space="preserve">
+    <value>发生错误。原因：{0}</value>
+  </data>
+  <data name="Notification.ModSettings.FileNotFound.Title" xml:space="preserve">
+    <value>未找到模组设置文件：{0}</value>
+  </data>
+  <data name="Notification.ModSettings.ReadFailed.Title" xml:space="preserve">
+    <value>读取模组设置失败：{0}</value>
+  </data>
+  <data name="Notification.ModSettings.ReadFailed.Message" xml:space="preserve">
+    <value>发生错误。原因：{0}</value>
+  </data>
+  <data name="Notification.ModSettings.NoChanges.Title" xml:space="preserve">
+    <value>未检测到更改</value>
+  </data>
+  <data name="Notification.ModSettings.NoChanges.Message" xml:space="preserve">
+    <value>模组设置未更新</value>
+  </data>
+  <data name="Notification.ModSettings.Updated.Title" xml:space="preserve">
+    <value>模组设置已更新</value>
+  </data>
+  <data name="Notification.ModSettings.Updated.Message" xml:space="preserve">
+    <value>已更新 {0} 的模组设置</value>
+  </data>
+  <data name="Notification.ModSettings.ModNotFound.Title" xml:space="preserve">
+    <value>未找到模组</value>
+  </data>
+  <data name="Notification.ModSettings.ModSettingsNotFound.Title" xml:space="preserve">
+    <value>未找到模组设置</value>
+  </data>
+  <data name="Notification.ModSettings.SetIni.GenericErrorMessage" xml:space="preserve">
+    <value>设置 Mod ini 时发生错误，尝试重启 UMManager 可能有帮助。</value>
+  </data>
+  <data name="Notification.ModSettings.SetIni.InvalidPath.Title" xml:space="preserve">
+    <value>Mod ini 路径无效</value>
+  </data>
+  <data name="Notification.ModSettings.SetIni.InvalidPath.Message" xml:space="preserve">
+    <value>解析 .ini 路径时发生错误</value>
+  </data>
+  <data name="Notification.ModSettings.SetIni.FileMissing.Title" xml:space="preserve">
+    <value>Mod ini 文件不存在</value>
+  </data>
+  <data name="Notification.ModSettings.SetIni.FileMissing.Message" xml:space="preserve">
+    <value>未找到文件：{0}</value>
+  </data>
+  <data name="Notification.ModSettings.SetIni.NotInFolder.Title" xml:space="preserve">
+    <value>Mod ini 不在模组文件夹内</value>
+  </data>
+  <data name="Notification.ModSettings.SetIni.NotInFolder.Message" xml:space="preserve">
+    <value>Mod ini 必须位于模组文件夹内。
+模组文件夹：{0}
+Ini 路径：{1}</value>
+  </data>
+  <data name="Notification.ModInstaller.Installed.Title" xml:space="preserve">
+    <value>模组“{0}”已安装</value>
+  </data>
+  <data name="Notification.ModInstaller.Installed.Message" xml:space="preserve">
+    <value>模组“{0}”（{1}）已成功添加到 {2} 模组列表</value>
+  </data>
+  <data name="Notification.ModInstaller.Added.ShortMessage" xml:space="preserve">
+    <value>模组已成功添加</value>
+  </data>
+  <data name="Notification.ModInstaller.SkinUndetected.Title" xml:space="preserve">
+    <value>无法识别新模组的皮肤</value>
+  </data>
+  <data name="Notification.ModInstaller.SkinUndetected.Message" xml:space="preserve">
+    <value>UMManager 无法确定该模组对应的游戏内皮肤，因此无法判断应禁用哪些模组。</value>
+  </data>
+  <data name="Dialog.ModsFolderNotEmpty.Title" xml:space="preserve">
+    <value>Mods 文件夹不为空</value>
+  </data>
+  <data name="Dialog.ModsFolderNotEmpty.Text" xml:space="preserve">
+    <value>所选 Mods 文件夹必须为空。请先清空此文件夹，然后再保存。后续请你自行将模组手动导入到对应角色的文件夹中。</value>
+  </data>
+  <data name="Notification.StartupSettingsSaved.Title" xml:space="preserve">
+    <value>启动设置已保存</value>
+  </data>
+  <data name="Notification.StartupSettingsSaved.Message" xml:space="preserve">
+    <value>启动设置已保存到“{0}”。</value>
+  </data>
+  <data name="Notification.CharacterSkinImage.SetFailed.Title" xml:space="preserve">
+    <value>设置皮肤图片失败</value>
+  </data>
+  <data name="Notification.CharacterSkinImage.InvalidClipboardFile.Message" xml:space="preserve">
+    <value>剪贴板图片不是有效的本地文件</value>
+  </data>
+  <data name="Notification.CharacterSkin.Added.Title" xml:space="preserve">
+    <value>添加皮肤成功</value>
+  </data>
+  <data name="Notification.CharacterSkin.Added.Message" xml:space="preserve">
+    <value>已添加皮肤分类</value>
+  </data>
+  <data name="Notification.CharacterSkin.AddFailed.Title" xml:space="preserve">
+    <value>添加皮肤失败</value>
+  </data>
+  <data name="Notification.CharacterSkin.Deleted.Title" xml:space="preserve">
+    <value>删除皮肤成功</value>
+  </data>
+  <data name="Notification.CharacterSkin.Deleted.Message" xml:space="preserve">
+    <value>已删除皮肤分类</value>
+  </data>
+  <data name="Notification.CharacterSkin.DeleteFailed.Title" xml:space="preserve">
+    <value>删除皮肤失败</value>
+  </data>
+  <data name="Notification.CharacterSkin.RenameSuccess.Title" xml:space="preserve">
+    <value>修改皮肤名称成功</value>
+  </data>
+  <data name="Notification.CharacterSkin.RenameFailed.Title" xml:space="preserve">
+    <value>修改皮肤名称失败</value>
+  </data>
+  <data name="Notification.ModToggle.EnableError.Title" xml:space="preserve">
+    <value>启用模组时发生错误：{0}</value>
+  </data>
+  <data name="Notification.ModToggle.DisableError.Title" xml:space="preserve">
+    <value>禁用模组时发生错误：{0}</value>
+  </data>
+  <data name="Common.Button.Hide" xml:space="preserve">
+    <value>隐藏</value>
+  </data>
+  <data name="Common.Button.Remove" xml:space="preserve">
+    <value>移除</value>
+  </data>
+  <data name="Common.Button.Set" xml:space="preserve">
+    <value>设置</value>
+  </data>
+  <data name="Common.Button.SetImage" xml:space="preserve">
+    <value>设置图片</value>
+  </data>
+  <data name="Common.Button.Show" xml:space="preserve">
+    <value>显示</value>
+  </data>
+  <data name="Dialog.LaunchFailed.Generic.Title" xml:space="preserve">
+    <value>无法打开</value>
+  </data>
+  <data name="Dialog.LaunchFailed.Path.Title" xml:space="preserve">
+    <value>无法打开路径</value>
+  </data>
+  <data name="Dialog.LaunchFailed.Uri.Title" xml:space="preserve">
+    <value>无法打开链接</value>
+  </data>
+  <data name="Dialog.UiCategory.BulkRemove.Text" xml:space="preserve">
+    <value>确定要从分类“{0}”中移除 {1} 个角色吗？</value>
+  </data>
+  <data name="Dialog.UiCategory.BulkRemove.Title" xml:space="preserve">
+    <value>批量移除</value>
+  </data>
+  <data name="Dialog.UiCategory.Create.Title" xml:space="preserve">
+    <value>创建分类</value>
+  </data>
+  <data name="Dialog.UiCategory.Delete.Text" xml:space="preserve">
+    <value>确定要删除分类“{0}”吗？删除后将同时删除其图片，并从所有角色中移除该分类标签。</value>
+  </data>
+  <data name="Dialog.UiCategory.Delete.Title" xml:space="preserve">
+    <value>删除分类</value>
+  </data>
+  <data name="Dialog.UiCategory.Edit.Title" xml:space="preserve">
+    <value>修改分类</value>
+  </data>
+  <data name="Dialog.UiCategory.Image.NotSelected" xml:space="preserve">
+    <value>未选择图片</value>
+  </data>
+  <data name="Dialog.UiCategory.Image.Pick" xml:space="preserve">
+    <value>选择图片</value>
+  </data>
+  <data name="Dialog.UiCategory.Image.Remove" xml:space="preserve">
+    <value>移除图片</value>
+  </data>
+  <data name="Dialog.UiCategory.Name.Header" xml:space="preserve">
+    <value>分类名称</value>
+  </data>
+  <data name="Dialog.UiCategory.Name.Placeholder" xml:space="preserve">
+    <value>请输入分类名称</value>
+  </data>
+  <data name="Notification.Character.DisableModsFailed.Title" xml:space="preserve">
+    <value>禁用模组失败</value>
+  </data>
+  <data name="Notification.Character.ModsDisabled.Title" xml:space="preserve">
+    <value>已禁用模组</value>
+  </data>
+  <data name="Notification.Character.ModsDisabled.Message" xml:space="preserve">
+    <value>已禁用 {0} 的全部模组。</value>
+  </data>
+  <data name="Notification.Command.Created.Title" xml:space="preserve">
+    <value>命令“{0}”已创建</value>
+  </data>
+  <data name="Notification.Command.RunFailed.Title" xml:space="preserve">
+    <value>运行命令时发生错误：{0}</value>
+  </data>
+  <data name="Notification.Command.Updated.Title" xml:space="preserve">
+    <value>命令“{0}”已更新</value>
+  </data>
+  <data name="Notification.Clipboard.GetImageFailed.Title" xml:space="preserve">
+    <value>无法从剪贴板获取图片</value>
+  </data>
+  <data name="Notification.Clipboard.NoValidImage.Title" xml:space="preserve">
+    <value>剪贴板不包含有效图片</value>
+  </data>
+  <data name="Notification.GameBanana.InvalidUrl.Title" xml:space="preserve">
+    <value>无效的 GameBanana 模组链接</value>
+  </data>
+  <data name="Notification.GameBanana.OpenModPageFailed.Title" xml:space="preserve">
+    <value>打开模组页面失败</value>
+  </data>
+  <data name="Notification.KeySwap.LoadFailed.Title" xml:space="preserve">
+    <value>加载热键失败：{0}</value>
+  </data>
+  <data name="Notification.KeySwap.SaveFailed.Title" xml:space="preserve">
+    <value>保存热键配置失败</value>
+  </data>
+  <data name="Notification.KeySwap.SaveFailed.Message" xml:space="preserve">
+    <value>保存 {0} 的热键配置失败。原因：{1}</value>
+  </data>
+  <data name="Notification.ModDragDrop.AddFailed.Title" xml:space="preserve">
+    <value>添加模组失败</value>
+  </data>
+  <data name="Notification.ModPane.CopiedFolderPath.Title" xml:space="preserve">
+    <value>已复制模组文件夹路径到剪贴板</value>
+  </data>
+  <data name="Notification.ModPane.LoadFailed.Title" xml:space="preserve">
+    <value>加载模组失败</value>
+  </data>
+  <data name="Notification.NotImplemented.HideCharacter.Message" xml:space="preserve">
+    <value>暂不支持隐藏角色</value>
+  </data>
+  <data name="Notification.NotImplemented.Message" xml:space="preserve">
+    <value>该功能暂未实现。</value>
+  </data>
+  <data name="Notification.NotImplemented.Title" xml:space="preserve">
+    <value>未实现</value>
+  </data>
+  <data name="Notification.ProcessStartFailed.GenericMessage" xml:space="preserve">
+    <value>启动 {0} 失败</value>
+  </data>
+  <data name="Notification.ProcessStartFailed.RequiresAdminMessage" xml:space="preserve">
+    <value>启动 {0} 失败：可能是该 exe 在属性中启用了“以管理员身份运行”。</value>
+  </data>
+  <data name="Notification.ProcessStartFailed.Title" xml:space="preserve">
+    <value>无法启动进程</value>
+  </data>
+  <data name="Notification.ProcessStartFailed.UacCanceledMessage" xml:space="preserve">
+    <value>启动 {0} 失败：可能是用户取消了 UAC（管理员）提示。</value>
+  </data>
+  <data name="Notification.ProcessStartFailed.UnknownMessage" xml:space="preserve">
+    <value>发生未知错误</value>
+  </data>
+  <data name="Notification.RestartFailed.Manual.Message" xml:space="preserve">
+    <value>请手动重启。原因：{0}</value>
+  </data>
+  <data name="Notification.RestartFailed.ManualShort.Message" xml:space="preserve">
+    <value>请手动重启</value>
+  </data>
+  <data name="Notification.RestartFailed.Title" xml:space="preserve">
+    <value>重启应用失败</value>
+  </data>
+  <data name="Notification.RestartFailed.TryLegacy.Message" xml:space="preserve">
+    <value>将尝试使用兼容方式重启。原因：{0}</value>
+  </data>
+  <data name="Notification.UiCategory.AddCharacterFailed.Title" xml:space="preserve">
+    <value>添加失败</value>
+  </data>
+  <data name="Notification.UiCategory.BulkRemove.None.Message" xml:space="preserve">
+    <value>当前分类没有可移除的角色。</value>
+  </data>
+  <data name="Notification.UiCategory.BulkRemove.Title" xml:space="preserve">
+    <value>批量移除</value>
+  </data>
+  <data name="Notification.UiCategory.BulkRemoveCompleted.Message" xml:space="preserve">
+    <value>已移除 {0} 个角色。</value>
+  </data>
+  <data name="Notification.UiCategory.BulkRemoveCompleted.Title" xml:space="preserve">
+    <value>批量移除完成</value>
+  </data>
+  <data name="Notification.UiCategory.BulkRemoveFailed.Title" xml:space="preserve">
+    <value>批量移除失败</value>
+  </data>
+  <data name="Notification.UiCategory.CreateFailed.Title" xml:space="preserve">
+    <value>创建分类失败</value>
+  </data>
+  <data name="Notification.UiCategory.EditFailed.Title" xml:space="preserve">
+    <value>修改分类失败</value>
+  </data>
+  <data name="Notification.UiCategory.HideFailed.Title" xml:space="preserve">
+    <value>隐藏分类失败</value>
+  </data>
+  <data name="Notification.UiCategory.NameEmpty.Message" xml:space="preserve">
+    <value>分类名称不能为空。</value>
+  </data>
+  <data name="Notification.UiCategory.RemoveCharacterFailed.Title" xml:space="preserve">
+    <value>移除失败</value>
+  </data>
+  <data name="Notification.UnhandledException.Message" xml:space="preserve">
+    <value>应用可能处于不稳定状态，随时可能崩溃。建议重启应用。</value>
+  </data>
+  <data name="Notification.UnhandledException.Title" xml:space="preserve">
+    <value>发生错误！</value>
+  </data>
+  <data name="Tooltip.Character.SingleSkin" xml:space="preserve">
+    <value>该角色只有一个默认游戏内皮肤，因此无法切换。</value>
+  </data>
+  <data name="Window.ModDownloads.ForMod.Title" xml:space="preserve">
+    <value>下载：{0}</value>
+  </data>
+  <data name="Window.ModDownloads.Title" xml:space="preserve">
+    <value>下载模组文件</value>
+  </data>
+  <data name="Window.SelectMods.Title" xml:space="preserve">
+    <value>选择模组</value>
+  </data>
+  <data name="Window.UnhandledException.Title" xml:space="preserve">
+    <value>UMManager - 未处理异常</value>
+  </data>
+  <data name="Common.Button.Select" xml:space="preserve">
+    <value>选择</value>
+  </data>
+  <data name="Common.Button.SelectFolder" xml:space="preserve">
+    <value>选择文件夹</value>
+  </data>
+  <data name="Notification.Command.CreateFailed.Title" xml:space="preserve">
+    <value>创建命令失败</value>
+  </data>
+  <data name="Notification.Command.UpdateFailed.Title" xml:space="preserve">
+    <value>更新命令失败</value>
+  </data>
+  <data name="Notification.SaveImageFailed.Title" xml:space="preserve">
+    <value>保存图片失败</value>
+  </data>
+</root>

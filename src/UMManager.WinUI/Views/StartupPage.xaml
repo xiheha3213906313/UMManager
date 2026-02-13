@@ -1,0 +1,137 @@
+<Page
+    x:Class="UMManager.WinUI.Views.StartupPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="using:UMManager.WinUI.Views.Controls"
+    xmlns:converters="using:CommunityToolkit.WinUI.UI.Converters"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:l="using:WinUI3Localizer"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Controls/DataTemplates.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Page.Resources>
+
+
+    <Grid x:Name="ContentArea">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="48" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <Grid Margin="{StaticResource SmallTopMargin}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <TextBlock
+                Grid.Row="0"
+                HorizontalAlignment="Left"
+                Style="{StaticResource TitleTextBlockStyle}"
+                Text="首次启动时可以进行设置"
+                l:Uids.Uid="/Startup/Startup_Header" />
+
+            <ComboBox
+                x:Name="GameSelectorBox"
+                Grid.Column="1"
+                MinWidth="180"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Bottom"
+                ItemTemplate="{StaticResource GameComboBoxEntryTemplate}"
+                ItemsSource="{x:Bind ViewModel.Games}"
+                SelectedItem="{x:Bind ViewModel.SelectedGame, Mode=TwoWay}"
+                SelectionChanged="GameSelector_OnSelectionChanged"
+                ToolTipService.ToolTip="请选择要管理模组的游戏。可随时在设置中更改。"
+                l:Uids.Uid="/Startup/GameSelectorBox" />
+        </Grid>
+
+        <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Disabled">
+
+            <StackPanel Margin="0,8,0,0">
+
+
+                <!--  Description  -->
+                <Grid Margin="{StaticResource SmallTopBottomMargin}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.Row="0">
+                        <TextBlock
+                            IsTextSelectionEnabled="True"
+                            Style="{ThemeResource BodyTextBlockStyle}"
+                            TextWrapping="WrapWholeWords"
+                            Text="首次使用时，请选择一个用来存放本游戏模组的 Mods 文件夹。该文件夹必须为空。后续请你自行手动将模组导入到对应角色的文件夹中。"
+                            l:Uids.Uid="/Startup/Body1" />
+
+                    </StackPanel>
+                    <TextBlock
+                        Grid.Row="1"
+                        Margin="0,8,0,0"
+                        IsTextSelectionEnabled="True"
+                        Style="{ThemeResource BodyTextBlockStyle}"
+                        TextWrapping="WrapWholeWords"
+                        Text="保存设置后，应用会在该 Mods 文件夹中自动创建分类与角色子文件夹。位于这些角色文件夹之外的模组会被忽略。启用/禁用模组通过给模组文件夹添加 “DISABLED_” 前缀来实现。"
+                        l:Uids.Uid="/Startup/Body2" />
+
+                    <TextBlock
+                        Grid.Row="2"
+                        Margin="0,4,0,0"
+                        IsTextSelectionEnabled="True"
+                        Style="{ThemeResource BodyStrongTextBlockStyle}"
+                        TextWrapping="WrapWholeWords"
+                        Text="在使用会修改文件的工具前，建议先备份你的模组与相关文件。"
+                        l:Uids.Uid="/Startup/BackupWarning" />
+
+                </Grid>
+
+
+                <controls:FolderSelector
+                    Title="选择 Mods 文件夹"
+                    Margin="4,8,4,8"
+                    BrowseCommand="{x:Bind ViewModel.BrowseModsFolderCommand}"
+                    Footer="所选文件夹必须为空。不为空请先清空，然后再保存。"
+                    PathChangedEvent="ModsFolder_OnPathChangedEvent"
+                    SelectedFolderValue="{x:Bind ViewModel.PathToModsFolderPicker.Path, Mode=TwoWay}"
+                    ValidationErrorText="{x:Bind ViewModel.PathToModsFolderPicker.ValidationMessages, Mode=OneWay}"
+                    l:Uids.Uid="/Settings/ModsFolderSelector" />
+
+                <StackPanel Margin="4,0,4,0">
+                    <StackPanel Orientation="Horizontal" Spacing="12">
+                        <TextBlock VerticalAlignment="Center" IsTextSelectionEnabled="True" Text="配置文件夹（用于保存 Mods 路径等设置）：" />
+                        <TextBlock VerticalAlignment="Center" IsTextSelectionEnabled="True" Text="{x:Bind ViewModel.ConfigFolderPathText, Mode=OneWay}" />
+                        <controls:LinkButton VerticalAlignment="Center" Link="{x:Bind ViewModel.ConfigFolderPath}" Text="打开配置文件夹..." />
+                    </StackPanel>
+                </StackPanel>
+
+                <Grid Margin="{StaticResource SmallTopBottomMargin}" Visibility="Collapsed">
+                    <TextBlock
+                        Margin="0,8,0,0"
+                        Style="{ThemeResource BodyTextBlockStyle}"
+                        TextWrapping="WrapWholeWords"
+                        Text="目前暂不支持卸载模组。未来支持后，可将选定模组移动到“已卸载模组”文件夹。" />
+                </Grid>
+                <controls:FolderSelector
+                    Title="已卸载模组文件夹（可选）"
+                    Margin="4,8,4,8"
+                    IsEnabled="False"
+                    Visibility="Collapsed" />
+
+                <!--  Save  -->
+                <Button
+                    Margin="0,16,0,0"
+                    HorizontalAlignment="Center"
+                    Command="{x:Bind ViewModel.SaveStartupSettingsCommand}"
+                    Content="保存" />
+
+            </StackPanel>
+        </ScrollViewer>
+
+    </Grid>
+</Page>
